@@ -1,0 +1,911 @@
+INSTRUCTIONS: CREATE MY HR AI SKILL LIBRARY
+
+Below are 18 skills. Each sits between markers like === SKILL: ai-use-case-intake === and === END SKILL: ai-use-case-intake ===. Each one is a complete SKILL.md file: a header block with a name and a description, then its steps.
+
+What to do:
+1. Create one skill for each, using whatever skill, custom agent, assistant, saved prompt or snippet feature this tool has.
+2. Create each exactly as written. Keep every name and every description word for word. Do not summarize, shorten, merge or rewrite any skill.
+3. If a skill with the same name already exists, ask me before overwriting it.
+4. If this tool has no way to create skills or agents, say so plainly in one sentence. Then fall back: keep each skill in this conversation as a named, callable instruction block. When I use a skill's name or type run <name> on: <text>, follow that skill exactly.
+5. Do not run any skill now. Only create or store them.
+6. When done, list every skill name with a one-line description. Then reply on the last line: Skills created: 18. If you used the fallback, reply: Skills stored: 18.
+
+The skills follow.
+
+=== SKILL: ai-use-case-intake ===
+---
+name: ai-use-case-intake
+description: "Scores a proposed HR task as an AI candidate (good fit, pilot with care, or not yet) and lists what to check before starting. Use when someone says should we use AI for this, is this a good AI use case, score this workflow, or brings a new idea for automating an HR task."
+---
+
+# Ai use case intake
+
+Decide whether an HR task is a sound candidate for AI, using a short scored check instead of enthusiasm.
+
+## When to use
+- Someone proposes using AI for a recurring HR task or process.
+- Several ideas need ranking before any pilot is chosen.
+
+## When to skip
+- The task is already running and the question is how well it works. Use adoption-check-in.
+
+## Inputs needed
+- The task in plain words, who does it today, how often, and roughly how long it takes.
+- What the output is used for and who sees it.
+- What data goes in (describe the kind, not the real records).
+
+## Steps
+1. Restate the task in one sentence. Ask one question if the task is unclear, then stop.
+2. Score each criterion 0 (poor), 1 (mixed) or 2 (strong), with one line of evidence from the user's input: volume and repetition; clear right answer or checkable output; low harm if the draft is wrong; human review is easy to keep; input data is available and can be protected; time saved is meaningful.
+3. Flag as a RISK GATE any task that affects hiring, pay, promotion, discipline, termination, or access to benefits. Do not score these as simple wins. Route them to hr-ai-risk-review first.
+4. Total the score out of 12. Suggest a band: 9 to 12 good candidate; 5 to 8 pilot with care; 0 to 4 not yet. Say the bands are a guide, not a rule.
+5. List the three facts that would most change the score and mark each UNKNOWN until the user confirms.
+6. Name the smallest safe first test: one task, one team, a small set of cases, human review on every output.
+7. Recommend one of: go to pilot-design, run hr-ai-risk-review first, redesign the task, or do not use AI for this.
+
+## Quality bar
+- Every score has a reason in the user's own facts. Unknowns are shown as unknowns, never filled in.
+
+## Output format
+A one-line verdict, a scored table, the risk gate flag if any, three unknowns, and the next step.
+
+## If input is missing
+Ask for the task, the frequency, and what the output is used for.
+
+## Works with
+Next: hr-ai-risk-review, pilot-design, roi-estimate.
+
+## Rules for every skill
+- Use only what the user gave. Say UNKNOWN (or [NEED FACT]) instead of guessing. Do not invent facts, quotes, numbers, dates or sources.
+- Draft only. Never send, post or act on anything. The user decides.
+- Use roles, not names. Ask the user to remove personal detail before pasting.
+- Plain English. No hype.
+=== END SKILL: ai-use-case-intake ===
+
+=== SKILL: hr-ai-risk-review ===
+---
+name: hr-ai-risk-review
+description: "Reviews a proposed AI use in HR for bias, privacy, employee consultation, human oversight and high-risk employment uses, and lists what to check. Use when someone says risk review, is this legal, bias check, works council, high-risk use, or before any AI touches hiring, pay, performance or discipline decisions."
+---
+
+# Hr ai risk review
+
+Produce a plain-English risk review that tells the team what to check and who to involve. This is a checklist for a human reviewer, not legal advice.
+
+## When to use
+- An AI use touches people decisions or personal data.
+- A pilot is about to start and no one has looked at risk yet.
+
+## When to skip
+- The use is a purely personal productivity task with no personal data and no decisions about people.
+
+## Inputs needed
+- What the AI will do, with what input, and who acts on the output.
+- Countries or regions where the affected people work.
+- Whether any decision about a person depends on the output.
+
+## Steps
+1. State the use in one sentence and say whether a decision about a person depends on it (yes, no, UNKNOWN).
+2. Check each area and rate it LOW, MEDIUM, HIGH or UNKNOWN with the reason: fairness and bias (could the output differ by group); personal data (what is entered, where it goes, how long it stays); transparency (do affected people know AI was used); human oversight (can a person review and overrule every output); accuracy (how will errors be found); consultation (do employee representatives, works councils or similar bodies need to be told or asked); documentation (what record is kept).
+3. Treat these as high-risk by default and say so: screening or ranking candidates, deciding pay or promotion, monitoring employees, and any step that leads to discipline or termination.
+4. For each region named, write: Check current law and your counsel. Do not cite a statute, regulation or article number unless the user supplied the text. If you are unsure of a rule, write UNKNOWN.
+5. List required actions before launch, who owns each, and what would stop the pilot.
+6. Give a plain verdict: proceed, proceed with conditions, or do not proceed yet.
+
+## Quality bar
+- No invented laws, dates or article numbers. Every legal point carries the label: check current law and your counsel, not legal advice.
+
+## Output format
+Verdict, risk table, required actions with owners, open questions, and the legal-check line.
+
+## If input is missing
+Ask for the use, the regions, and whether a decision about a person depends on it.
+
+## Works with
+Pairs with pii-redaction-before-ai and pilot-design.
+
+## Rules for every skill
+- Use only what the user gave. Say UNKNOWN (or [NEED FACT]) instead of guessing. Do not invent facts, quotes, numbers, dates or sources.
+- Draft only. Never send, post or act on anything. The user decides.
+- Use roles, not names. Ask the user to remove personal detail before pasting.
+- Plain English. No hype.
+- Legal points are prompts for review, not advice: check current law and your counsel, not legal advice. Never cite a statute or article number you were not given.
+=== END SKILL: hr-ai-risk-review ===
+
+=== SKILL: pii-redaction-before-ai ===
+---
+name: pii-redaction-before-ai
+description: "Shows what to strip or replace with roles before pasting HR text into an AI tool, and can redact a pasted draft. Use when someone says redact this, is it safe to paste, remove personal details, anonymize this case, or before pasting employee data into any AI tool."
+---
+
+# Pii redaction before ai
+
+Help the user remove personal detail from text before an AI sees it, while keeping enough meaning for the task.
+
+## When to use
+- HR text with names, ids, health or family details is about to go into an AI tool.
+- A team needs a simple do-and-do-not list for what may be pasted.
+
+## When to skip
+- The user's company policy bans pasting this kind of text at all. Say so and stop.
+
+## Inputs needed
+- The text to redact, or the type of document.
+- The task the AI will do with it.
+- The company rule on approved tools, if the user knows it.
+
+## Steps
+1. First ask: does the user's policy allow this tool for this kind of data? If UNKNOWN, say to check before pasting.
+2. Replace direct identifiers with roles: names become roles (Employee A, the manager, the HR partner); ids, contact details, addresses, exact dates of birth and account numbers are removed.
+3. Reduce indirect identifiers: exact job titles in small teams, rare locations, exact salaries (use a band), exact dates (use a month or an interval).
+4. Mark special categories for removal unless essential: health, family status, religion, union membership, ethnicity, immigration status, disciplinary history.
+5. Return the redacted text and a table of what was changed, with the placeholder used for each item, so the user can map back privately.
+6. Warn that small teams and unusual events can still identify a person after redaction. Rate residual risk LOW, MEDIUM or HIGH.
+7. If the task cannot be done without identifying detail, say so and suggest doing that step without AI.
+
+## Quality bar
+- Nothing identifying remains in the redacted output. Meaning needed for the task is kept.
+
+## Output format
+Redacted text, a change table, residual risk rating, and a one-line reminder to follow company policy.
+
+## If input is missing
+Ask for the text and what the AI will do with it.
+
+## Works with
+Run before any drafting skill. Pairs with hr-ai-risk-review.
+
+## Rules for every skill
+- Use only what the user gave. Say UNKNOWN (or [NEED FACT]) instead of guessing. Do not invent facts, quotes, numbers, dates or sources.
+- Draft only. Never send, post or act on anything. The user decides.
+- Use roles, not names. Ask the user to remove personal detail before pasting.
+- Plain English. No hype.
+=== END SKILL: pii-redaction-before-ai ===
+
+=== SKILL: ai-output-verifier ===
+---
+name: ai-output-verifier
+description: "Checks an AI-written HR draft claim by claim for facts, numbers, sources, policy accuracy and invented detail, and marks each VERIFIED, UNVERIFIED or WRONG. Use when someone says verify this, fact-check this draft, did the AI make this up, or before sending an AI draft to anyone."
+---
+
+# Ai output verifier
+
+Treat the AI draft as a claim, not proof. Check what can be checked and flag the rest.
+
+## When to use
+- An AI produced a draft, summary, answer or analysis that someone will rely on.
+- A number, quote, policy reference or legal point appears in the draft.
+
+## When to skip
+- The user wants the draft written, not checked. Use the drafting skill instead.
+
+## Inputs needed
+- The draft.
+- The source material it should rest on (policy text, data, notes), if any.
+
+## Steps
+1. List every checkable claim in the draft: facts, numbers, dates, names of policies, quotes, legal points, causal statements.
+2. For each claim, compare to the supplied source. Mark VERIFIED (matches source, cite the passage), UNVERIFIED (no source supplied), or WRONG (conflicts with source, quote both).
+3. Mark any legal or regulatory statement UNVERIFIED unless the user supplied the text. Add: check current law and your counsel.
+4. Check arithmetic by redoing it. Show the working.
+5. Flag confident wording that outruns the evidence, and invented specifics such as a precise percentage with no source.
+6. Flag anything that could embarrass or harm if wrong, and list the three checks to do first.
+7. Offer a corrected version only if the user asks.
+
+## Quality bar
+- No claim is marked VERIFIED without a source passage. Never verify from memory.
+
+## Output format
+A claim table (claim, status, evidence), the top three checks, and a go or hold call.
+
+## If input is missing
+Ask for the draft and any source text.
+
+## Works with
+Run after any drafting skill and before sending.
+
+## Rules for every skill
+- Use only what the user gave. Say UNKNOWN (or [NEED FACT]) instead of guessing. Do not invent facts, quotes, numbers, dates or sources.
+- Draft only. Never send, post or act on anything. The user decides.
+- Use roles, not names. Ask the user to remove personal detail before pasting.
+- Plain English. No hype.
+=== END SKILL: ai-output-verifier ===
+
+=== SKILL: pilot-design ===
+---
+name: pilot-design
+description: "Designs a small, time-boxed AI pilot with a clear question, success measures, guardrails, a stop rule and a review date. Use when someone says design a pilot, plan a trial, how do we test this, or turns an AI idea into a test."
+---
+
+# Pilot design
+
+Turn an idea into a small test that can fail safely and teach something.
+
+## When to use
+- A use case passed intake and the team wants to try it.
+- Leaders ask for a pilot plan.
+
+## When to skip
+- No one has checked risk. Run hr-ai-risk-review first when people decisions are involved.
+
+## Inputs needed
+- The use case and the team.
+- How long and how many people.
+- What leaders would need to see to continue.
+
+## Steps
+1. Write the question the pilot answers, in one sentence.
+2. Set scope: who takes part, which tasks, which tools, for how long. Keep it small.
+3. Define success in advance: two or three measures, each with a baseline (UNKNOWN if not measured) and a target range.
+4. Define quality checks: who reviews outputs, how often, and what counts as an error.
+5. Set guardrails: allowed data, banned uses, required human review, how issues are reported.
+6. Set a stop rule: what result or incident ends the pilot early.
+7. Plan check-ins (use adoption-check-in) and a final review date.
+8. List what the pilot cannot prove, such as long-term use or results at larger scale.
+
+## Quality bar
+- A stranger could run the pilot from the plan. Targets are ranges, not promises.
+
+## Output format
+One-page plan: question, scope, measures, guardrails, stop rule, schedule, limits.
+
+## If input is missing
+Ask for the use case, the team size and the duration.
+
+## Works with
+Follows ai-use-case-intake. Feeds adoption-check-in and roi-estimate.
+
+## Rules for every skill
+- Use only what the user gave. Say UNKNOWN (or [NEED FACT]) instead of guessing. Do not invent facts, quotes, numbers, dates or sources.
+- Draft only. Never send, post or act on anything. The user decides.
+- Use roles, not names. Ask the user to remove personal detail before pasting.
+- Plain English. No hype.
+=== END SKILL: pilot-design ===
+
+=== SKILL: adoption-check-in ===
+---
+name: adoption-check-in
+description: "Writes a 10-minute check-in script for people using a new AI tool or way of working, summarizes several check-ins into a pattern report, or logs lessons after a project. Use when someone says adoption check-in, are people still using it, lessons learned, or pastes notes from user conversations."
+---
+
+# Adoption check in
+
+Usage counts are noise. Three honest questions show whether people keep using something.
+
+## When to use
+- A tool or prompt set was introduced to a small group.
+- A pilot or project just finished and lessons should be kept.
+
+## When to skip
+- Nobody has used the tool yet.
+
+## Inputs needed
+- Mode A (script), Mode B (pattern summary) or Mode C (lessons log).
+- Mode A: what people are using. Mode B: notes from several check-ins labelled by week. Mode C: what happened.
+
+## Steps
+1. MODE A: write the script. Ask in order: What did you use it for? What did you stop using it for? What surprised you? Close with: If this vanished tomorrow, what would you do instead? Add opening and closing lines, a rule to note their words not interpretation, and three probes for vague answers.
+2. MODE B: build a cohort view by role label (not name), week by week. Report who RETURNED in weeks 2, 3 and 4, not launch counts.
+3. Group uses in their words, list what people stopped doing and why, list surprises and uses nobody designed, and tally the would-you-miss-it answers: would miss it, would find a workaround, would not notice.
+4. State what a few weeks and a small group cannot show. Name a later date for a sustained-use readout.
+5. MODE C: write a lessons entry with: what we tried, what happened, what we would do differently, what to tell the next team. Keep it to one page.
+6. Recommend one: continue, change one thing, or stop, with the reason. If nobody came back, say so. That is the most useful finding.
+
+## Quality bar
+- Use only the notes. No claims about people who were not asked.
+
+## Output format
+Mode A: the script. Mode B: the pattern report with the recommendation. Mode C: the lessons entry.
+
+## If input is missing
+Ask which mode and for the tool or the notes.
+
+## Works with
+Follows pilot-design. Feeds executive-brief.
+
+## Rules for every skill
+- Use only what the user gave. Say UNKNOWN (or [NEED FACT]) instead of guessing. Do not invent facts, quotes, numbers, dates or sources.
+- Draft only. Never send, post or act on anything. The user decides.
+- Use roles, not names. Ask the user to remove personal detail before pasting.
+- Plain English. No hype.
+=== END SKILL: adoption-check-in ===
+
+=== SKILL: roi-estimate ===
+---
+name: roi-estimate
+description: "Builds a conservative, assumption-first estimate of the time or cost value of an AI use, shown as ranges with the assumptions listed. Use when someone says ROI, business case, how much time will this save, what is it worth, or leaders ask for numbers."
+---
+
+# Roi estimate
+
+Give leaders a range they can trust, with every assumption visible. Never a single hopeful number.
+
+## When to use
+- A pilot or proposal needs a value estimate.
+- Someone quotes a savings figure that needs checking.
+
+## When to skip
+- No baseline data exists and nobody can estimate one. Say UNKNOWN and propose how to measure first.
+
+## Inputs needed
+- The task, volume per period and time per task today.
+- Expected time with AI, with review time included.
+- Costs: tool licences, setup, training, review effort (UNKNOWN if not given).
+
+## Steps
+1. List every input as an assumption with its source: measured, estimated by the user, or UNKNOWN.
+2. Compute a low, middle and high case. Low uses fewer tasks and less saving; high is capped, not wishful.
+3. Always include review and correction time. AI drafts that need heavy rework save less than they seem to.
+4. Separate hours saved from money saved. Hours saved only become money if the time is redirected or headcount changes. Say which applies.
+5. Add the costs and show net value as a range.
+6. Show which single assumption moves the result most, and the cheapest way to test it.
+7. State what is NOT counted: quality gains, risk reduction, morale, and the cost of mistakes.
+
+## Quality bar
+- Ranges only. All arithmetic shown. No figure appears that the user did not supply or that is not labelled an assumption.
+
+## Output format
+Assumptions table, low/middle/high result, biggest sensitivity, what is not counted.
+
+## If input is missing
+Ask for volume, current time per task and expected time with AI.
+
+## Works with
+Pairs with pilot-design and pressure-test.
+
+## Rules for every skill
+- Use only what the user gave. Say UNKNOWN (or [NEED FACT]) instead of guessing. Do not invent facts, quotes, numbers, dates or sources.
+- Draft only. Never send, post or act on anything. The user decides.
+- Use roles, not names. Ask the user to remove personal detail before pasting.
+- Plain English. No hype.
+=== END SKILL: roi-estimate ===
+
+=== SKILL: pressure-test ===
+---
+name: pressure-test
+description: "Stress-tests a plan, proposal, decision or deliverable from five angles, with an optional pre-mortem mode that assumes it failed and works backward. Use when someone says pressure-test this, challenge this, what could go wrong, premortem, or before a decision goes to leaders."
+---
+
+# Pressure test
+
+Find the weak points before someone else does. No flattery, only evidence-based pushback.
+
+## When to use
+- A plan, business case or recommendation is about to be shared.
+- A decision is hard to reverse.
+
+## When to skip
+- The user wants help writing it. Use the drafting skill first.
+
+## Inputs needed
+- The thing to test, in the user's words.
+- Mode: standard or pre-mortem (default standard).
+- Any evidence in hand.
+
+## Steps
+1. Restate the claim or plan in one sentence and list what it assumes.
+2. Turn the goal into conditions that must be true. Score each TRUE, FALSE or UNKNOWN from the evidence given.
+3. Run five voices, each with one hard question and one finding: the skeptic (where is the evidence), the affected person (who bears the cost), the operator (can this actually be run), the risk owner (what breaks and who is harmed), the outsider (what would a smart newcomer ask).
+4. PRE-MORTEM MODE: say it is twelve months later and this failed. List the five most likely reasons, ranked, each with an early warning sign and a prevention.
+5. Give a verdict: back it, back it with changes, or not yet. Name the one cheapest check that would most change the verdict.
+6. Say what you could not test from what was supplied.
+
+## Quality bar
+- Each finding points to something in the input or says UNKNOWN. No invented evidence.
+
+## Output format
+Conditions table, five findings, optional failure list, verdict, cheapest next check.
+
+## If input is missing
+Ask for the plan and which mode.
+
+## Works with
+Pairs with roi-estimate and executive-brief.
+
+## Rules for every skill
+- Use only what the user gave. Say UNKNOWN (or [NEED FACT]) instead of guessing. Do not invent facts, quotes, numbers, dates or sources.
+- Draft only. Never send, post or act on anything. The user decides.
+- Use roles, not names. Ask the user to remove personal detail before pasting.
+- Plain English. No hype.
+=== END SKILL: pressure-test ===
+
+=== SKILL: prompt-builder ===
+---
+name: prompt-builder
+description: "Rewrites a rough prompt into a stronger one (sharpen mode) or turns a repeated HR task into a reusable, tested prompt with an example and a check case (library mode). Use when someone says fix this prompt, improve this prompt, build a prompt for, add this to our prompt library, or pastes a rough request."
+---
+
+# Prompt builder
+
+Better prompts are specific, bounded and testable. Rewrite or build the prompt; do not do the task inside it.
+
+## When to use
+- A prompt is vague or gives poor answers.
+- A task repeats and the team should reuse one good prompt.
+
+## When to skip
+- The user wants the task done now. Do the task.
+
+## Inputs needed
+- Mode: sharpen or library.
+- The rough prompt or the repeated task.
+- Who reads the answer and which tool will run it, if known.
+
+## Steps
+1. If the request is too short to know the goal, ask one question and stop.
+2. Name the real outcome and the assumptions the prompt takes for granted.
+3. Fix: no single objective, no role or audience, conflicting asks (split them), vague words such as good or thorough (make them measurable), no output format or length, and hedges such as try to.
+4. Add a done-condition and an instruction to say UNKNOWN rather than guess.
+5. Add placeholders for inputs, written like [PASTE REDACTED TEXT HERE], and a reminder to remove personal detail first (see pii-redaction-before-ai).
+6. LIBRARY MODE: add a one-line purpose, an owner role, the input list, an example good output of three to five lines, and one test case: an input with the output you expect, and one input that should make the prompt refuse or ask.
+7. If the original was already strong, change only what needs it and say so.
+
+## Quality bar
+- One objective. Measurable terms. Format stated. Honest uncertainty kept.
+
+## Output format
+The prompt in one copyable block, then up to five bullets on what changed. Library mode adds the entry card.
+
+## If input is missing
+Ask for the rough prompt or the repeated task.
+
+## Works with
+Pairs with skill-writer and ai-output-verifier.
+
+## Rules for every skill
+- Use only what the user gave. Say UNKNOWN (or [NEED FACT]) instead of guessing. Do not invent facts, quotes, numbers, dates or sources.
+- Draft only. Never send, post or act on anything. The user decides.
+- Use roles, not names. Ask the user to remove personal detail before pasting.
+- Plain English. No hype.
+=== END SKILL: prompt-builder ===
+
+=== SKILL: skill-writer ===
+---
+name: skill-writer
+description: "Turns a repeated task into a new skill file with a name, trigger description, steps and output format. Use when someone says make this a skill, write a skill for, turn this into a reusable skill, or has done the same task three times."
+---
+
+# Skill writer
+
+A skill is a short instruction file an AI follows the same way every time. Write one that a stranger can use.
+
+## When to use
+- The same kind of task keeps coming back.
+- A good prompt should become a shared, named routine.
+
+## When to skip
+- The task happens once. Just do it.
+
+## Inputs needed
+- A description of the task, or a transcript of how the user did it.
+- An example input and a good output, if available.
+- Who will use it.
+
+## Steps
+1. Ask for one real example if none was given.
+2. Pick a kebab-case name of one to three words. The folder and the name field must match.
+3. Write the description in one or two sentences: what it does, then phrases a user would say to trigger it.
+4. Write sections: When to use, When to skip, Inputs, Steps (numbered, one action each), Quality bar, Output format, If input is missing, Works with.
+5. Include the standing rules: say UNKNOWN instead of guessing, draft only and never send, use roles not names.
+6. Keep it under 120 lines. Cut anything the AI already does by default.
+7. Write one test: an input and the output it should produce. Run it mentally and fix gaps.
+8. Output the file with its folder path.
+
+## Quality bar
+- No personal or company detail. Plain English. A reader can follow the steps without asking questions.
+
+## Output format
+The complete SKILL.md in one block, the folder path, and the test case.
+
+## If input is missing
+Ask for the task and one real example.
+
+## Works with
+Pairs with prompt-builder.
+
+## Rules for every skill
+- Use only what the user gave. Say UNKNOWN (or [NEED FACT]) instead of guessing. Do not invent facts, quotes, numbers, dates or sources.
+- Draft only. Never send, post or act on anything. The user decides.
+- Use roles, not names. Ask the user to remove personal detail before pasting.
+- Plain English. No hype.
+=== END SKILL: skill-writer ===
+
+=== SKILL: training-session-designer ===
+---
+name: training-session-designer
+description: "Designs a short hands-on session that teaches HR colleagues to use AI safely and well, with exercises, a safety segment and a follow-up. Use when someone says design a training, AI workshop for HR, teach my team, lunch and learn, or enablement session."
+---
+
+# Training session designer
+
+People learn AI by using it on their own work, with clear safety rules. Design for practice, not slides.
+
+## When to use
+- An HR team or group needs to learn practical AI use.
+- A pilot needs onboarding for its participants.
+
+## When to skip
+- The need is a policy briefing only. Use employee-comms-draft.
+
+## Inputs needed
+- Audience (roles, not names), their current experience, session length, tool in use.
+- Two or three real tasks they do weekly.
+
+## Steps
+1. Set one outcome: by the end, each person can do X on their own task.
+2. Plan blocks that fit the time: why and what not to paste (pii-redaction-before-ai), a live demo on a hypothetical task, hands-on practice on their own redacted tasks, checking outputs (ai-output-verifier), and what to do next.
+3. Write two or three practice exercises with a starting prompt, a good-output description and a common failure to watch for.
+4. Add a safety segment: allowed data, banned uses, who to ask. Mark company policy as UNKNOWN if not supplied.
+5. Add a take-home: one task to try within a week and one question to bring back.
+6. Plan a follow-up check-in two to four weeks later using adoption-check-in.
+7. List what to prepare: hypothetical samples, access, a one-page rules sheet.
+
+## Quality bar
+- Every minute has a purpose. Exercises use hypothetical samples, never real employee records.
+
+## Output format
+A timed agenda, the exercises, the rules sheet text and the follow-up plan.
+
+## If input is missing
+Ask for the audience, the length and two typical tasks.
+
+## Works with
+Uses prompt-builder and adoption-check-in.
+
+## Rules for every skill
+- Use only what the user gave. Say UNKNOWN (or [NEED FACT]) instead of guessing. Do not invent facts, quotes, numbers, dates or sources.
+- Draft only. Never send, post or act on anything. The user decides.
+- Use roles, not names. Ask the user to remove personal detail before pasting.
+- Plain English. No hype.
+=== END SKILL: training-session-designer ===
+
+=== SKILL: hr-policy-qa-draft ===
+---
+name: hr-policy-qa-draft
+description: "Drafts answers to employee questions using only the policy text the user supplies, quotes the passage, and escalates when the text does not answer. Use when someone says answer this policy question, draft a reply from the handbook, policy lookup, or builds a policy question and answer set."
+---
+
+# Hr policy qa draft
+
+Answer from the supplied text only. If the text does not say it, the answer is that it does not say it.
+
+## When to use
+- An employee question needs a draft reply grounded in a written policy.
+- A team is building a question and answer set from its own policy text.
+
+## When to skip
+- No policy text is supplied. Ask for it, do not answer from general knowledge.
+
+## Inputs needed
+- The question, in redacted form.
+- The policy passage or document, with its version or date if known.
+- The region it applies to.
+
+## Steps
+1. Check that the question can be answered from the supplied text. If not, say so first.
+2. Quote the exact passage that answers it and name its section.
+3. Write the answer in plain English in three to six sentences. Do not add rules that are not in the text.
+4. State conditions and exceptions found in the text. State what the text does not cover.
+5. Escalate to a named role (such as the HR partner or legal counsel) when the question involves a legal right, a dispute, discrimination, health, leave entitlement, termination or anything the text leaves open. Write: check current law and your counsel, not legal advice.
+6. Mark the version and date of the policy used, or UNKNOWN.
+7. Offer a short, kind reply for the employee and keep the internal notes separate.
+
+## Quality bar
+- Every claim traces to a quoted passage. No guessing across regions or versions.
+
+## Output format
+Employee-ready draft, the quoted passage, a not-covered list, and an escalation line if needed.
+
+## If input is missing
+Ask for the question and the policy text.
+
+## Works with
+Pairs with ai-output-verifier and pii-redaction-before-ai.
+
+## Rules for every skill
+- Use only what the user gave. Say UNKNOWN (or [NEED FACT]) instead of guessing. Do not invent facts, quotes, numbers, dates or sources.
+- Draft only. Never send, post or act on anything. The user decides.
+- Use roles, not names. Ask the user to remove personal detail before pasting.
+- Plain English. No hype.
+- Legal points are prompts for review, not advice: check current law and your counsel, not legal advice. Never cite a statute or article number you were not given.
+=== END SKILL: hr-policy-qa-draft ===
+
+=== SKILL: employee-comms-draft ===
+---
+name: employee-comms-draft
+description: "Drafts a clear message to employees or managers about an AI change, policy, pilot or rule, with a plain-language FAQ and a translation check. Use when someone says draft the announcement, write to staff about AI, explain this change, manager talking points, or FAQ for employees."
+---
+
+# Employee comms draft
+
+People trust plain, honest messages. Say what changes, what does not, and what to do.
+
+## When to use
+- A change needs explaining to staff or managers.
+- A rollout needs a FAQ and talking points.
+
+## When to skip
+- The message needs legal sign-off first and none has been given. Draft but mark it HOLD.
+
+## Inputs needed
+- The change, audience and region.
+- Facts that are decided, and facts that are not.
+- Where to ask questions.
+
+## Steps
+1. Write one-sentence headline of what changes and who it affects.
+2. Write the body in short paragraphs: what is changing, why, what stays the same, what people need to do and by when, where to ask questions.
+3. State honestly what is not decided yet. Never promise outcomes such as job security unless the user supplied that decision.
+4. State plainly how AI is and is not used, and that a person reviews decisions that affect people (only if true and supplied).
+5. Write five to eight FAQ items in the employees' likely words, including the worried ones.
+6. Add manager talking points of five lines.
+7. Translation check: avoid idioms, keep sentences short, flag terms that may not translate, and list the languages where a local reviewer should read it first.
+8. Mark anything that needs consultation with employee representatives or legal review before release.
+
+## Quality bar
+- Reading level suits a general employee. No hype, no vague reassurance.
+
+## Output format
+Message, FAQ, manager talking points, translation flags, and a list of items to approve before sending.
+
+## If input is missing
+Ask for the change, the audience and what is decided.
+
+## Works with
+Pairs with hr-ai-risk-review and executive-brief.
+
+## Rules for every skill
+- Use only what the user gave. Say UNKNOWN (or [NEED FACT]) instead of guessing. Do not invent facts, quotes, numbers, dates or sources.
+- Draft only. Never send, post or act on anything. The user decides.
+- Use roles, not names. Ask the user to remove personal detail before pasting.
+- Plain English. No hype.
+=== END SKILL: employee-comms-draft ===
+
+=== SKILL: job-description-rewrite ===
+---
+name: job-description-rewrite
+description: "Rewrites a job description to be clear, inclusive and skills-based, flags biased or inflated wording, and separates must-haves from nice-to-haves. Use when someone says rewrite this job description, check this posting for bias, clean up the JD, or build a role profile."
+---
+
+# Job description rewrite
+
+A good posting says what the work is and what is truly required. It filters people in, not out.
+
+## When to use
+- A job description or posting needs a rewrite or audit.
+
+## When to skip
+- The role itself is not defined. Use discovery-interview-guide with the hiring manager first.
+
+## Inputs needed
+- The current description or a list of tasks.
+- Which requirements are truly required.
+- Region, work arrangement, pay range if the user chooses to include it.
+
+## Steps
+1. Summarize the role in two sentences. Ask if the purpose is unclear.
+2. Flag problems with the original: gendered or age-coded words, jargon, unrealistic experience lists, degree requirements that are not needed, and duplicate asks.
+3. Rewrite with: purpose of the role, what the person will do in the first year, must-have skills (maximum five), nice-to-haves, how to apply, and a short inclusion statement the company may adjust.
+4. State requirements as skills or outcomes, not years of experience, unless a legal or safety rule applies. Mark such rules UNKNOWN for the user to confirm.
+5. Note pay transparency requirements may apply in some places: check current law and your counsel.
+6. Return a changes table (original, new, reason).
+
+## Quality bar
+- No claim about the employer, the pay or the benefits that the user did not supply.
+
+## Output format
+The rewritten posting, a changes table, and open questions for the hiring manager.
+
+## If input is missing
+Ask for the current text or the task list.
+
+## Works with
+Feeds structured-interview-kit.
+
+## Rules for every skill
+- Use only what the user gave. Say UNKNOWN (or [NEED FACT]) instead of guessing. Do not invent facts, quotes, numbers, dates or sources.
+- Draft only. Never send, post or act on anything. The user decides.
+- Use roles, not names. Ask the user to remove personal detail before pasting.
+- Plain English. No hype.
+=== END SKILL: job-description-rewrite ===
+
+=== SKILL: structured-interview-kit ===
+---
+name: structured-interview-kit
+description: "Builds a structured interview kit: competencies, consistent questions, behaviour-based probes and a scoring guide, so every candidate is judged the same way. Use when someone says interview questions, structured interview, scorecard, interview guide, or prepare to interview for this role."
+---
+
+# Structured interview kit
+
+Same questions, same scoring, written evidence. This reduces bias and improves decisions.
+
+## When to use
+- A role is open and interviews are being planned.
+
+## When to skip
+- The decision is already made. A kit built afterwards only justifies it.
+
+## Inputs needed
+- The role description or must-have skills.
+- Interview stages and who interviews.
+- Any skills that must be tested.
+
+## Steps
+1. List four to six competencies taken directly from the must-have skills.
+2. For each, write two behaviour-based questions asking for a past situation, plus two follow-up probes (what was your part, what happened next, what would you change).
+3. Add one job-related practical exercise if useful.
+4. Write a 1 to 5 scoring guide for each competency with a plain description of weak, acceptable and strong answers.
+5. Add rules: ask every candidate the same core questions, take notes on what was said, score before discussing, and compare to the guide, not to other candidates.
+6. List questions never to ask: family plans, age, religion, health, origin and similar protected topics. Add: check current law and your counsel for your region.
+7. Add a debrief template: scores, evidence, disagreements, decision, reason.
+
+## Quality bar
+- Every question ties to a stated requirement. No question probes protected characteristics.
+
+## Output format
+Interview guide, scorecard and debrief template.
+
+## If input is missing
+Ask for the role and the must-have skills.
+
+## Works with
+Follows job-description-rewrite.
+
+## Rules for every skill
+- Use only what the user gave. Say UNKNOWN (or [NEED FACT]) instead of guessing. Do not invent facts, quotes, numbers, dates or sources.
+- Draft only. Never send, post or act on anything. The user decides.
+- Use roles, not names. Ask the user to remove personal detail before pasting.
+- Plain English. No hype.
+- Legal points are prompts for review, not advice: check current law and your counsel, not legal advice. Never cite a statute or article number you were not given.
+=== END SKILL: structured-interview-kit ===
+
+=== SKILL: performance-feedback ===
+---
+name: performance-feedback
+description: "Turns a manager's raw notes into clear feedback built on observed behaviour and impact, with next steps, and checks for bias or vague wording. Use when someone says write feedback, performance review draft, how do I say this, review wording check, or coaching note."
+---
+
+# Performance feedback
+
+Feedback describes what happened and what it caused. It does not describe the person.
+
+## When to use
+- A manager needs to write or deliver feedback or a review summary.
+
+## When to skip
+- The matter involves a complaint, investigation or possible discipline. Escalate to the HR partner and legal counsel.
+
+## Inputs needed
+- The manager's notes in redacted form, with the role (not the name).
+- Period covered and the standard or goal used.
+- What the manager wants the person to do next.
+
+## Steps
+1. Sort the notes into observed behaviour (what was seen or done), impact (what it caused) and judgment (opinions).
+2. Turn each judgment into a behaviour and an impact, or mark it UNSUPPORTED and ask for an example.
+3. Write feedback in this shape: situation, behaviour, impact, what would be better, support offered.
+4. Balance: include real strengths with specifics, not filler praise.
+5. Bias check: flag personality labels, comparisons to other people, vague words such as attitude or fit, and uneven standards between similar roles.
+6. Write two to three next steps that are specific, time-bound and owned.
+7. Add three questions the manager should ask the person, to hear their side first.
+8. If the notes suggest a ratings or pay decision, label the draft as input for a human decision only.
+
+## Quality bar
+- No fact beyond the notes. No rating suggested unless the manager gave the scale and evidence.
+
+## Output format
+Feedback draft, flagged wording table, next steps, and questions to ask.
+
+## If input is missing
+Ask for the notes and the standard used.
+
+## Works with
+Pairs with pii-redaction-before-ai and hr-ai-risk-review.
+
+## Rules for every skill
+- Use only what the user gave. Say UNKNOWN (or [NEED FACT]) instead of guessing. Do not invent facts, quotes, numbers, dates or sources.
+- Draft only. Never send, post or act on anything. The user decides.
+- Use roles, not names. Ask the user to remove personal detail before pasting.
+- Plain English. No hype.
+=== END SKILL: performance-feedback ===
+
+=== SKILL: executive-brief ===
+---
+name: executive-brief
+description: "Compresses any HR or AI update into a short brief that lets a leader decide fast (headline, why it matters, the ask), or turns meeting notes into decisions and owned actions. Use when someone says executive summary, brief for leaders, tighten this, smart brevity, meeting actions, or what did we decide."
+---
+
+# Executive brief
+
+Lead with the point. Leaders read the top and decide.
+
+## When to use
+- A long update needs to become a one-minute read.
+- Meeting notes need to become decisions and actions.
+
+## When to skip
+- The reader needs the full analysis. Send it and add a brief on top.
+
+## Inputs needed
+- Mode: brief or actions.
+- The source text or notes.
+- The reader's role and the decision needed.
+
+## Steps
+1. BRIEF MODE: write a headline of eight words or fewer stating the point.
+2. Add one sentence on why it matters now, then the ask: the decision, by whom, by when.
+3. Add up to three bullets of evidence, each with its number and source, or UNKNOWN. Add the biggest risk and the cost of waiting.
+4. State what is not known yet and when it will be.
+5. ACTIONS MODE: list decisions made, each with the reason. List actions with an owner role, a due date or UNKNOWN, and the deliverable. List open questions and parked items.
+6. Keep to 150 words for a brief. Cut jargon and filler. Keep numbers exact as given.
+
+## Quality bar
+- Nothing in the brief that is not in the source. Numbers are never rounded up or invented.
+
+## Output format
+The brief or the decisions and actions list, ready to paste.
+
+## If input is missing
+Ask for the mode, the source and the reader.
+
+## Works with
+Pairs with pressure-test and employee-comms-draft.
+
+## Rules for every skill
+- Use only what the user gave. Say UNKNOWN (or [NEED FACT]) instead of guessing. Do not invent facts, quotes, numbers, dates or sources.
+- Draft only. Never send, post or act on anything. The user decides.
+- Use roles, not names. Ask the user to remove personal detail before pasting.
+- Plain English. No hype.
+=== END SKILL: executive-brief ===
+
+=== SKILL: discovery-interview-guide ===
+---
+name: discovery-interview-guide
+description: "Prepares questions for a conversation with a stakeholder, employee group or new manager to learn how work really happens and what AI could help or harm. Use when someone says discovery interview, stakeholder interview, how do they really work, first week questions, or day-one questions."
+---
+
+# Discovery interview guide
+
+Ask about real work, not opinions about AI. Treat what you hear as a hypothesis until it is checked.
+
+## When to use
+- Starting an AI adoption project with a team.
+- Starting a new role and meeting the manager or sponsor.
+
+## When to skip
+- The facts are already documented and verified.
+
+## Inputs needed
+- Who will be interviewed (role) and why.
+- What decision the interviews will inform.
+- Time available.
+
+## Steps
+1. Set the goal of the conversation in one sentence.
+2. Write opening lines that explain purpose and how notes are used, and invite people to say no to any question.
+3. Write ten questions in four groups: what the work is (walk me through last week), where it hurts (what slows you down, what do you redo), how people use AI or other tools today, and what worries them.
+4. Add three probes for vague answers: for example, can you give me an example, what happened next, who else is involved.
+5. For a new role, add: what does success look like in 90 days, what is the unwritten rule, who should I meet, what should I not touch yet.
+6. Add note rules: record their words, keep opinions separate from observations, no names in shared notes.
+7. Add a closing question: what should I have asked that I did not.
+8. End with a template to summarize several conversations into patterns.
+
+## Quality bar
+- Questions are open and neutral. None leads toward a wanted answer.
+
+## Output format
+Interview guide, probes, note template and a pattern summary template.
+
+## If input is missing
+Ask who is being interviewed and what decision it informs.
+
+## Works with
+Feeds ai-use-case-intake and pilot-design.
+
+## Rules for every skill
+- Use only what the user gave. Say UNKNOWN (or [NEED FACT]) instead of guessing. Do not invent facts, quotes, numbers, dates or sources.
+- Draft only. Never send, post or act on anything. The user decides.
+- Use roles, not names. Ask the user to remove personal detail before pasting.
+- Plain English. No hype.
+=== END SKILL: discovery-interview-guide ===
+
