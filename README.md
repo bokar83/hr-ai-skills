@@ -50,10 +50,6 @@ Maintained by Boubacar Barry.
 - **onboarding-plan-builder**: Builds a structured first 30, 60 and 90 day onboarding plan for a new employee, including how to learn the approved AI tools.
 - **executive-brief**: Compresses any HR or AI update into a short brief that lets a leader decide fast (headline, why it matters, the ask), or turns meeting notes into decisions and owned actions.
 
-## Skills first, prompts as fallback
-
-The skills are the main product. The file prompts/QUICK_PROMPTS.txt holds ten short copy-paste prompts, each mapped to a skill, for tools that cannot import skills. Use the prompts only as a fallback.
-
 ## How to import
 
 1. Point your AI tool at this repository's public URL: https://github.com/bokar83/hr-ai-skills (tools that import skills from GitHub will read the skills folder).
