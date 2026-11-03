@@ -6,7 +6,7 @@ Maintained by Boubacar Barry.
 
 ## What is in here
 
-27 skills in the open skill format (skills/<name>/SKILL.md with a name and a description). Each skill says when to use it, what it needs, the steps, the output, and what to do when information is missing. Every skill follows the same rules: say UNKNOWN instead of guessing, draft only and never send, use roles not names.
+27 skills in the open skill format (one file per skill in the Skills folder, named <skill-name>.md, with a name and a description). Each skill says when to use it, what it needs, the steps, the output, and what to do when information is missing. Every skill follows the same rules: say UNKNOWN instead of guessing, draft only and never send, use roles not names.
 
 ### Decide and assess
 
@@ -52,8 +52,8 @@ Maintained by Boubacar Barry.
 
 ## How to import
 
-1. Point your AI tool at this repository's public URL: https://github.com/bokar83/hr-ai-skills (tools that import skills from GitHub will read the skills folder).
-2. Or download the repository and copy the skills folder into the place your tool keeps skills.
+1. Point your AI tool at this repository's public URL: https://github.com/bokar83/hr-ai-skills (tools that import skills from GitHub will read the Skills folder).
+2. Or download the repository and copy the Skills folder into the place your tool keeps skills.
 3. Or, if your tool cannot import files, paste the whole of IMPORT_PROMPT.txt into a chat. It asks the tool to create every skill, or to hold them as callable blocks.
 
 ## How to test

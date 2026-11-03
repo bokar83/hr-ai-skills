@@ -1,6 +1,6 @@
 # Skills index
 
-27 skills. Each lives in skills/<name>/SKILL.md.
+27 skills. Each is one file in the Skills folder, named <skill-name>.md.
 
 - **adoption-check-in**: Writes a 10-minute check-in script for people using a new AI tool or way of working, summarizes several check-ins into a pattern report, or logs lessons after a project.
 - **ai-champions-network**: Designs and runs a small network of AI champions inside HR: roles, selection, time, meeting rhythm and how to share what works.

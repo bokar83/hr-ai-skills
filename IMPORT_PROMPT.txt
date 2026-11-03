@@ -1,6 +1,6 @@
 INSTRUCTIONS: CREATE MY HR AI SKILL LIBRARY
 
-Below are 27 skills. Each sits between markers like === SKILL: ai-use-case-intake === and === END SKILL: ai-use-case-intake ===. Each one is a complete SKILL.md file: a header block with a name and a description, then its steps.
+Below are 27 skills. Each sits between markers like === SKILL: ai-use-case-intake === and === END SKILL: ai-use-case-intake ===. Each one is a complete skill file: a header block with a name and a description, then its steps. In the repository each lives in the Skills folder as <skill-name>.md.
 
 What to do:
 1. Create one skill for each, using whatever skill, custom agent, assistant, saved prompt or snippet feature this tool has.
