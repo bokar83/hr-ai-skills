@@ -1,6 +1,6 @@
 INSTRUCTIONS: CREATE MY HR AI SKILL LIBRARY
 
-Below are 18 skills. Each sits between markers like === SKILL: ai-use-case-intake === and === END SKILL: ai-use-case-intake ===. Each one is a complete SKILL.md file: a header block with a name and a description, then its steps.
+Below are 27 skills. Each sits between markers like === SKILL: ai-use-case-intake === and === END SKILL: ai-use-case-intake ===. Each one is a complete SKILL.md file: a header block with a name and a description, then its steps.
 
 What to do:
 1. Create one skill for each, using whatever skill, custom agent, assistant, saved prompt or snippet feature this tool has.
@@ -8,7 +8,7 @@ What to do:
 3. If a skill with the same name already exists, ask me before overwriting it.
 4. If this tool has no way to create skills or agents, say so plainly in one sentence. Then fall back: keep each skill in this conversation as a named, callable instruction block. When I use a skill's name or type run <name> on: <text>, follow that skill exactly.
 5. Do not run any skill now. Only create or store them.
-6. When done, list every skill name with a one-line description. Then reply on the last line: Skills created: 18. If you used the fallback, reply: Skills stored: 18.
+6. When done, list every skill name with a one-line description. Then reply on the last line: Skills created: 27. If you used the fallback, reply: Skills stored: 27.
 
 The skills follow.
 
@@ -363,7 +363,7 @@ Pairs with pilot-design and pressure-test.
 === SKILL: pressure-test ===
 ---
 name: pressure-test
-description: "Stress-tests a plan, proposal, decision or deliverable from five angles, with an optional pre-mortem mode that assumes it failed and works backward. Use when someone says pressure-test this, challenge this, what could go wrong, premortem, or before a decision goes to leaders."
+description: "Quick five-voice stress test of a plan, proposal or decision, with an optional pre-mortem mode that assumes it failed and works backward. Use when someone says pressure-test this, challenge this, what could go wrong, or premortem. For a high-stakes people-impacting AI decision use hr-ai-council instead."
 ---
 
 # Pressure test
@@ -400,7 +400,7 @@ Conditions table, five findings, optional failure list, verdict, cheapest next c
 Ask for the plan and which mode.
 
 ## Works with
-Pairs with roi-estimate and executive-brief.
+Pairs with roi-estimate and executive-brief. For a deeper role-based panel on high-stakes decisions, use hr-ai-council.
 
 ## Rules for every skill
 - Use only what the user gave. Say UNKNOWN (or [NEED FACT]) instead of guessing. Do not invent facts, quotes, numbers, dates or sources.
@@ -908,4 +908,457 @@ Feeds ai-use-case-intake and pilot-design.
 - Use roles, not names. Ask the user to remove personal detail before pasting.
 - Plain English. No hype.
 === END SKILL: discovery-interview-guide ===
+
+=== SKILL: hr-ai-council ===
+---
+name: hr-ai-council
+description: "Runs a role-based expert panel on a high-stakes HR AI decision: seven standing seats, on-call seats, an always-on Contrarian and a non-voting Closer who gives a verdict. Use when someone says run the council, full review, expert panel, go or no-go on this AI rollout, or before AI touches hiring, pay, performance or monitoring. For a quick check use pressure-test."
+---
+
+# Hr ai council
+
+A deeper, role-based review for decisions that are costly or hard to reverse. Seats are roles, never real people. For a fast check use pressure-test instead.
+
+## When to use
+- A decision affects many employees, personal data, or any hiring, pay, performance or monitoring step.
+- Leaders need a go, go-with-changes or stop call with reasons.
+
+## When to skip
+- The decision is small and reversible. Use pressure-test.
+- No facts are available yet. Run discovery-interview-guide first.
+
+## Inputs needed
+- The proposal in the user's words, and what is decided versus open.
+- Depth: quick, standard or deep (default standard).
+- Regions affected and any evidence in hand.
+
+## Steps
+1. Restate the proposal and list what it assumes. Name the decision and its deadline.
+2. Seat the DEFAULT PANEL of seven roles: skeptical chief HR officer; employee-relations and consultation voice; privacy and legal counsel voice; frontline manager; security and IT voice; finance lead; adoption and change lead.
+3. Add ON-CALL seats only when relevant, and say why each is called: candidate or employee voice; country or regional HR lead; accessibility and inclusion voice; union or employee-representative voice; data scientist; vendor-risk voice.
+4. Always seat the CONTRARIAN, who must argue the opposite of the emerging view with the strongest honest case, even if the panel agrees.
+5. Every seat must give: one concrete way this fails from its viewpoint, one thing it would need to see before agreeing, and a stance (support, support with changes, oppose, UNKNOWN). Base each point on the user's input; say UNKNOWN where there is no evidence.
+6. Depth: QUICK = default seats, one line each. STANDARD = default seats plus needed on-call seats, short paragraphs. DEEP = all relevant seats, two rounds (seats react to each other), and a pre-mortem of the top risk.
+7. Label every legal point: check current law and counsel, not legal advice. Never cite a statute or article number that was not supplied.
+8. The CLOSER does not vote. The Closer outputs: verdict (go, go-with-changes, stop); the top three changes; what would change the verdict; and the UNKNOWNs with an owner role and the cheapest way to resolve each.
+
+## Quality bar
+- Each seat sounds like a different role with different concerns. The Contrarian is never a weak, for-show objection. No invented evidence.
+
+## Output format
+Panel table (seat, failure, needs to see, stance), Contrarian case, Closer verdict, top three changes, what would change it, UNKNOWNs.
+
+## If input is missing
+Ask for the proposal, the depth and the regions.
+
+## Works with
+Pairs with hr-ai-risk-review, roi-estimate and executive-brief. Quick version: pressure-test.
+
+## Rules for every skill
+- Use only what the user gave. Say UNKNOWN (or [NEED FACT]) instead of guessing. Do not invent facts, quotes, numbers, dates or sources.
+- Draft only. Never send, post or act on anything. The user decides.
+- Use roles, not names. Ask the user to remove personal detail before pasting.
+- Plain English. No hype.
+- Legal points are prompts for review, not advice: check current law and your counsel, not legal advice. Never cite a statute or article number you were not given.
+=== END SKILL: hr-ai-council ===
+
+=== SKILL: vendor-ai-evaluation ===
+---
+name: vendor-ai-evaluation
+description: "Builds a question list and scoring sheet for evaluating an HR technology or AI vendor: data location, bias testing evidence, retention, sub-processors, security, exit. Use when someone says vendor evaluation, vendor questionnaire, assess this HR tool, RFP questions for AI, or due diligence."
+---
+
+# Vendor ai evaluation
+
+Buy on evidence. Ask for it in writing and mark what the vendor did not show.
+
+## When to use
+- A team is choosing or renewing an HR or AI tool.
+
+## When to skip
+- The tool is already approved and the question is adoption. Use adoption-check-in.
+
+## Inputs needed
+- What the tool does and which HR process it touches.
+- Regions of the employees affected.
+- Must-have requirements, if any.
+
+## Steps
+1. Write questions in groups: data (what is collected, where stored, retention, deletion, training on customer data); model (what it does, how accuracy and bias were tested, by whom, with what evidence); security (certifications asked for, access controls, incident notice); sub-processors and locations; human oversight features; explainability; support and change notice; pricing and exit (data export, deletion at exit).
+2. For each question add what a good answer looks like and what a weak answer looks like.
+3. Add a 0 to 2 scoring column and a column for evidence seen (document, demo, none).
+4. Flag deal-breakers the user names. Mark any legal or regional requirement: check current law and counsel.
+5. Add a short list of references to ask the vendor for, and a pilot-first clause suggestion.
+6. Summarize with: strong, weak, unproven, and the three questions to press hardest.
+
+## Quality bar
+- Every vendor claim is treated as unproven until evidence is shown.
+
+## Output format
+Question list, scoring sheet, deal-breaker flags and a press-hard list.
+
+## If input is missing
+Ask for the tool, the process and the regions.
+
+## Works with
+Pairs with hr-ai-risk-review and hr-ai-council.
+
+## Rules for every skill
+- Use only what the user gave. Say UNKNOWN (or [NEED FACT]) instead of guessing. Do not invent facts, quotes, numbers, dates or sources.
+- Draft only. Never send, post or act on anything. The user decides.
+- Use roles, not names. Ask the user to remove personal detail before pasting.
+- Plain English. No hype.
+- Legal points are prompts for review, not advice: check current law and your counsel, not legal advice. Never cite a statute or article number you were not given.
+=== END SKILL: vendor-ai-evaluation ===
+
+=== SKILL: ai-use-policy-draft ===
+---
+name: ai-use-policy-draft
+description: "Drafts a plain-English AI acceptable-use policy for HR staff or employees from the facts the user supplies, with open questions marked. Use when someone says write an AI policy, acceptable use guidelines, what can staff paste into AI, or AI rules for the team."
+---
+
+# Ai use policy draft
+
+A short policy people can follow beats a long one nobody reads.
+
+## When to use
+- A team or company needs written rules for using AI at work.
+
+## When to skip
+- Legal has not been involved and the user plans to publish. Draft, but mark it HOLD for review.
+
+## Inputs needed
+- Approved tools (or UNKNOWN).
+- Types of data in scope.
+- Regions and any existing policies the user can supply.
+
+## Steps
+1. List what the user supplied and what is UNKNOWN. Do not invent approved tools or company rules.
+2. Draft sections: purpose, who it applies to, approved tools, what may be entered, what must never be entered, human review rules, disclosure when AI helped, what to do if something goes wrong, who to ask.
+3. Write the do and do-not list in short lines an employee can scan.
+4. State that people remain responsible for the final work and any decision about a person needs human review.
+5. Mark clauses that depend on local law or consultation: check current law and counsel.
+6. End with open questions for the policy owner, and a review date field.
+7. Offer a one-page version for staff.
+
+## Quality bar
+- No clause that the user did not supply or approve as a draft choice. Open items are visible.
+
+## Output format
+Policy draft, one-page staff version, open questions list.
+
+## If input is missing
+Ask for approved tools and data types in scope.
+
+## Works with
+Pairs with ai-incident-review and employee-comms-draft.
+
+## Rules for every skill
+- Use only what the user gave. Say UNKNOWN (or [NEED FACT]) instead of guessing. Do not invent facts, quotes, numbers, dates or sources.
+- Draft only. Never send, post or act on anything. The user decides.
+- Use roles, not names. Ask the user to remove personal detail before pasting.
+- Plain English. No hype.
+- Legal points are prompts for review, not advice: check current law and your counsel, not legal advice. Never cite a statute or article number you were not given.
+=== END SKILL: ai-use-policy-draft ===
+
+=== SKILL: change-impact-assessment ===
+---
+name: change-impact-assessment
+description: "Maps who is affected by an AI or process change, what changes for each group, what they must do differently, and where resistance or harm is likely. Use when someone says change impact, who is affected, stakeholder map, what will people resist, or before a rollout."
+---
+
+# Change impact assessment
+
+Changes land on people, not on org charts. Name the groups and what changes for each.
+
+## When to use
+- A rollout is planned and the effects on roles and tasks are not yet mapped.
+
+## When to skip
+- The change is a single person's personal tool choice.
+
+## Inputs needed
+- The change in plain words.
+- Groups or roles involved.
+- Timing and what is already decided.
+
+## Steps
+1. List affected groups by role and approximate size (UNKNOWN if not given).
+2. For each group state: what changes, what stays, what they must do differently, what support they need, and what they gain or lose.
+3. Rate impact LOW, MEDIUM or HIGH with the reason.
+4. List likely concerns in their own words, including fears about jobs or monitoring. Do not dismiss them.
+5. Flag groups needing formal consultation or notice: check current law and counsel.
+6. List the first three actions to take per HIGH group and who owns them.
+7. Name what would tell you the change is landing badly, and when to check.
+
+## Quality bar
+- Every group impact traces to the input or is marked UNKNOWN.
+
+## Output format
+Impact table, concerns list, consultation flags and a first-actions plan.
+
+## If input is missing
+Ask for the change and the groups.
+
+## Works with
+Feeds employee-comms-draft and global-rollout-planner.
+
+## Rules for every skill
+- Use only what the user gave. Say UNKNOWN (or [NEED FACT]) instead of guessing. Do not invent facts, quotes, numbers, dates or sources.
+- Draft only. Never send, post or act on anything. The user decides.
+- Use roles, not names. Ask the user to remove personal detail before pasting.
+- Plain English. No hype.
+- Legal points are prompts for review, not advice: check current law and your counsel, not legal advice. Never cite a statute or article number you were not given.
+=== END SKILL: change-impact-assessment ===
+
+=== SKILL: global-rollout-planner ===
+---
+name: global-rollout-planner
+description: "Plans a multi-country rollout of an AI tool or practice, with a per-country checklist for language, consultation, data transfer and local owners. Use when someone says rollout plan, global rollout, country by country, which countries first, or expanding beyond one region."
+---
+
+# Global rollout planner
+
+One plan, many places. Rules and culture differ, so check each place instead of copying the first.
+
+## When to use
+- A tool or practice is going to more than one country or region.
+
+## When to skip
+- Only one country is involved. Use pilot-design and change-impact-assessment.
+
+## Inputs needed
+- Countries and rough headcount.
+- What is being rolled out.
+- Known local rules, if supplied.
+
+## Steps
+1. List countries in a table with headcount, language, local HR owner role and status.
+2. For each country add checks, each marked KNOWN or UNKNOWN: consultation or notice to employee representatives; data transfer and storage rules; works rules on monitoring; language and translation review; local holidays and busy periods; local IT constraints.
+3. Never state a local legal rule unless the user supplied it. Write UNKNOWN and: check current law and local counsel.
+4. Propose waves: pilot countries first, with a reason for each pick, then later waves.
+5. Add a single list of global must-haves and a list of allowed local variations.
+6. Add per-wave exit criteria and what would pause the rollout.
+7. List the first five local checks to run this month.
+
+## Quality bar
+- No legal claim by country that the user did not supply.
+
+## Output format
+Country table, wave plan, global versus local rules, first checks.
+
+## If input is missing
+Ask for the countries and the tool.
+
+## Works with
+Uses change-impact-assessment and hr-ai-risk-review.
+
+## Rules for every skill
+- Use only what the user gave. Say UNKNOWN (or [NEED FACT]) instead of guessing. Do not invent facts, quotes, numbers, dates or sources.
+- Draft only. Never send, post or act on anything. The user decides.
+- Use roles, not names. Ask the user to remove personal detail before pasting.
+- Plain English. No hype.
+- Legal points are prompts for review, not advice: check current law and your counsel, not legal advice. Never cite a statute or article number you were not given.
+=== END SKILL: global-rollout-planner ===
+
+=== SKILL: ai-champions-network ===
+---
+name: ai-champions-network
+description: "Designs and runs a small network of AI champions inside HR: roles, selection, time, meeting rhythm and how to share what works. Use when someone says AI champions, set up a champions group, peer network, community of practice, or scale adoption through people."
+---
+
+# Ai champions network
+
+Adoption spreads person to person. A small, supported group beats a mandate.
+
+## When to use
+- A pilot worked and the practice needs to spread.
+- A team wants peer support for AI use.
+
+## When to skip
+- Nobody has tried the tool yet.
+
+## Inputs needed
+- Team size and areas.
+- Time people can give.
+- Tool and approved uses.
+
+## Steps
+1. Define the purpose in one sentence and what champions do not do (they are not help desk or enforcers).
+2. Set the profile: curiosity, credibility with peers, willingness to share failures. Invite volunteers.
+3. Set the time ask and keep it small. Mark it UNKNOWN until leaders agree.
+4. Plan a monthly rhythm: share one thing that worked, one that failed, one question for the group.
+5. Create a shared log of tested prompts with owner and last checked date (see prompt-builder).
+6. Add a simple way to report concerns and incidents (see ai-incident-review).
+7. Plan recognition that does not rely on pay promises.
+8. Define measures: returning users and what peers say they would miss (see adoption-check-in).
+
+## Quality bar
+- Realistic time ask. No promises on pay or promotion.
+
+## Output format
+Charter, selection guide, monthly agenda, log template and measures.
+
+## If input is missing
+Ask for team size and available time.
+
+## Works with
+Uses adoption-check-in and prompt-builder.
+
+## Rules for every skill
+- Use only what the user gave. Say UNKNOWN (or [NEED FACT]) instead of guessing. Do not invent facts, quotes, numbers, dates or sources.
+- Draft only. Never send, post or act on anything. The user decides.
+- Use roles, not names. Ask the user to remove personal detail before pasting.
+- Plain English. No hype.
+=== END SKILL: ai-champions-network ===
+
+=== SKILL: hr-data-insights ===
+---
+name: hr-data-insights
+description: "Guides safe analysis of HR data with AI: protecting small groups, avoiding individual conclusions, stating caveats and checking the numbers. Use when someone says analyze HR data, turnover analysis, survey results, headcount trends, or can I paste this spreadsheet."
+---
+
+# Hr data insights
+
+Numbers about people can harm people. Aggregate, protect small groups, state what the data cannot say.
+
+## When to use
+- Someone wants patterns from engagement, turnover, pay or similar data.
+
+## When to skip
+- The goal is to judge or rank named individuals. Stop and explain why.
+
+## Inputs needed
+- The question the analysis should answer.
+- A description of the columns and counts, or redacted or aggregated data.
+- Minimum group size rule, if the company has one.
+
+## Steps
+1. Confirm the question and what decision it informs.
+2. Check data handling first: is the tool approved for this data, and has identifying detail been removed (see pii-redaction-before-ai).
+3. Set a minimum group size (suggest five unless the user supplies another) and suppress or merge any cell below it.
+4. Analyze at group level only. Never draw conclusions about one person.
+5. State what the data cannot show: causes, small samples, missing groups, self-report bias.
+6. Show arithmetic and counts. Ask the user to verify with ai-output-verifier before sharing.
+7. Write findings as: what the data shows, how sure, what it does not show, what to check next.
+8. Warn if a result could identify someone by combination (for example a rare role plus location).
+
+## Quality bar
+- Nothing is concluded beyond the data. Small groups are protected.
+
+## Output format
+Findings with confidence notes, suppressed-cell list, caveats and next checks.
+
+## If input is missing
+Ask for the question and a data description.
+
+## Works with
+Pairs with ai-output-verifier and hr-ai-risk-review.
+
+## Rules for every skill
+- Use only what the user gave. Say UNKNOWN (or [NEED FACT]) instead of guessing. Do not invent facts, quotes, numbers, dates or sources.
+- Draft only. Never send, post or act on anything. The user decides.
+- Use roles, not names. Ask the user to remove personal detail before pasting.
+- Plain English. No hype.
+=== END SKILL: hr-data-insights ===
+
+=== SKILL: ai-incident-review ===
+---
+name: ai-incident-review
+description: "Walks a team through what to do when an AI output caused harm or nearly did: contain, record, find the cause, tell the right people and change the process. Use when someone says AI got it wrong, incident review, near miss, bad AI answer sent, or data pasted by mistake."
+---
+
+# Ai incident review
+
+Treat AI errors like any workplace incident: contain, learn, fix the process, no blame.
+
+## When to use
+- An AI output or use caused or nearly caused harm, a leak or a wrong decision.
+
+## When to skip
+- Someone reports serious harm to a person. Involve the HR partner and legal counsel now; use this only to structure notes.
+
+## Inputs needed
+- What happened in plain, redacted words.
+- Who noticed and when.
+- What data or decision was involved.
+
+## Steps
+1. Write the timeline in facts only: what happened, when, who noticed, what the AI did.
+2. Contain: list the immediate steps (stop use, retrieve or correct what went out, preserve evidence) and who owns each.
+3. Classify: near miss, error with no harm, harm to a person, data exposure. Say UNKNOWN where unclear.
+4. Check notification needs: affected people, managers, privacy or legal owners, regulators. Say: check current law and counsel for any duty to notify; do not state deadlines.
+5. Find causes in layers: input, tool, prompt, review step, training, policy. Ask what made the mistake easy.
+6. Write corrective actions with owner role and date, and one change to the process, not just a reminder.
+7. Write a short, non-blaming summary for sharing. Log lessons (see adoption-check-in lessons mode).
+
+## Quality bar
+- Facts only. No blame on named people. No legal conclusions.
+
+## Output format
+Timeline, classification, containment list, notification checks, causes and actions.
+
+## If input is missing
+Ask what happened and what data or decision was involved.
+
+## Works with
+Pairs with ai-use-policy-draft and hr-ai-risk-review.
+
+## Rules for every skill
+- Use only what the user gave. Say UNKNOWN (or [NEED FACT]) instead of guessing. Do not invent facts, quotes, numbers, dates or sources.
+- Draft only. Never send, post or act on anything. The user decides.
+- Use roles, not names. Ask the user to remove personal detail before pasting.
+- Plain English. No hype.
+- Legal points are prompts for review, not advice: check current law and your counsel, not legal advice. Never cite a statute or article number you were not given.
+=== END SKILL: ai-incident-review ===
+
+=== SKILL: onboarding-plan-builder ===
+---
+name: onboarding-plan-builder
+description: "Builds a structured first 30, 60 and 90 day onboarding plan for a new employee, including how to learn the approved AI tools. Use when someone says onboarding plan, first 90 days, new hire plan, or welcome plan."
+---
+
+# Onboarding plan builder
+
+A new hire needs clarity: what to learn, whom to meet, and what good looks like.
+
+## When to use
+- A person is joining a role and needs a plan.
+
+## When to skip
+- The user wants a plan for a leader's own new role. Use discovery-interview-guide.
+
+## Inputs needed
+- The role (not the name), team and start timing.
+- Key tools, systems and stakeholders.
+- Success measures for the role, if known.
+
+## Steps
+1. State the role purpose and the three outcomes that matter in 90 days (UNKNOWN if not supplied).
+2. Week one: access and equipment, meet manager and buddy, rules sheet, safe-use rules for AI tools (see ai-use-policy-draft).
+3. Days 1 to 30: learn the work, shadow, small first tasks, who to meet.
+4. Days 31 to 60: own a task, use approved tools on real work with review.
+5. Days 61 to 90: own an outcome, give feedback on onboarding, agree next goals.
+6. Add check-in questions for weeks one, four and eight, and a manager checklist.
+7. Add accessibility and local needs prompts: check with the employee, not assumptions.
+8. Mark policy items UNKNOWN unless supplied.
+
+## Quality bar
+- Plan fits the role. No invented systems or policies.
+
+## Output format
+A 30/60/90 plan, check-in questions and a manager checklist.
+
+## If input is missing
+Ask for the role and the key tools.
+
+## Works with
+Uses discovery-interview-guide and training-session-designer.
+
+## Rules for every skill
+- Use only what the user gave. Say UNKNOWN (or [NEED FACT]) instead of guessing. Do not invent facts, quotes, numbers, dates or sources.
+- Draft only. Never send, post or act on anything. The user decides.
+- Use roles, not names. Ask the user to remove personal detail before pasting.
+- Plain English. No hype.
+=== END SKILL: onboarding-plan-builder ===
 

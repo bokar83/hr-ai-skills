@@ -1,6 +1,6 @@
 ---
 name: pressure-test
-description: "Stress-tests a plan, proposal, decision or deliverable from five angles, with an optional pre-mortem mode that assumes it failed and works backward. Use when someone says pressure-test this, challenge this, what could go wrong, premortem, or before a decision goes to leaders."
+description: "Quick five-voice stress test of a plan, proposal or decision, with an optional pre-mortem mode that assumes it failed and works backward. Use when someone says pressure-test this, challenge this, what could go wrong, or premortem. For a high-stakes people-impacting AI decision use hr-ai-council instead."
 ---
 
 # Pressure test
@@ -37,7 +37,7 @@ Conditions table, five findings, optional failure list, verdict, cheapest next c
 Ask for the plan and which mode.
 
 ## Works with
-Pairs with roi-estimate and executive-brief.
+Pairs with roi-estimate and executive-brief. For a deeper role-based panel on high-stakes decisions, use hr-ai-council.
 
 ## Rules for every skill
 - Use only what the user gave. Say UNKNOWN (or [NEED FACT]) instead of guessing. Do not invent facts, quotes, numbers, dates or sources.
