@@ -1,6 +1,6 @@
 # Skills index
 
-27 skills. Each is one file in the Skills folder, named <skill-name>.md.
+36 skills. Each is one file in the Skills folder, named <skill-name>.md. The same skills are also provided as skills/<skill-name>/SKILL.md (identical content) for tools that import from that layout.
 
 - **adoption-check-in**: Writes a 10-minute check-in script for people using a new AI tool or way of working, summarizes several check-ins into a pattern report, or logs lessons after a project.
 - **ai-champions-network**: Designs and runs a small network of AI champions inside HR: roles, selection, time, meeting rhythm and how to share what works.
@@ -13,19 +13,28 @@
 - **employee-comms-draft**: Drafts a clear message to employees or managers about an AI change, policy, pilot or rule, with a plain-language FAQ and a translation check.
 - **executive-brief**: Compresses any HR or AI update into a short brief that lets a leader decide fast (headline, why it matters, the ask), or turns meeting notes into decisions and owned actions.
 - **global-rollout-planner**: Plans a multi-country rollout of an AI tool or practice, with a per-country checklist for language, consultation, data transfer and local owners.
+- **grilling**: The AI interviews the user one hard question at a time to expose weak spots in an idea, plan or position.
 - **hr-ai-council**: Runs a role-based expert panel on a high-stakes HR AI decision: seven standing seats, on-call seats, an always-on Contrarian and a non-voting Closer who gives a verdict.
 - **hr-ai-risk-review**: Reviews a proposed AI use in HR for bias, privacy, employee consultation, human oversight and high-risk employment uses, and lists what to check.
 - **hr-data-insights**: Guides safe analysis of HR data with AI: protecting small groups, avoiding individual conclusions, stating caveats and checking the numbers.
 - **hr-policy-qa-draft**: Drafts answers to employee questions using only the policy text the user supplies, quotes the passage, and escalates when the text does not answer.
+- **humanize**: Removes the recognizable habits of machine-written text without changing meaning.
 - **job-description-rewrite**: Rewrites a job description to be clear, inclusive and skills-based, flags biased or inflated wording, and separates must-haves from nice-to-haves.
+- **lateral-leverage**: Finds ways to repurpose or recombine what already exists before anyone builds or buys something new, then filters hard down to one to three survivors.
+- **lessons-log**: Turns a week of rough notes into a lessons log entry and decision records, then runs a 20-minute Friday review.
+- **meeting-actions**: Turns messy meeting notes or a transcript into decisions, actions with owners, open questions, risks and a follow-up message.
 - **onboarding-plan-builder**: Builds a structured first 30, 60 and 90 day onboarding plan for a new employee, including how to learn the approved AI tools.
 - **performance-feedback**: Turns a manager's raw notes into clear feedback built on observed behaviour and impact, with next steps, and checks for bias or vague wording.
 - **pii-redaction-before-ai**: Shows what to strip or replace with roles before pasting HR text into an AI tool, and can redact a pasted draft.
 - **pilot-design**: Designs a small, time-boxed AI pilot with a clear question, success measures, guardrails, a stop rule and a review date.
+- **prd**: A short project brief written before work starts: goal, who it is for, what is in, what is explicitly not in, success measure, risks, and a GO, NO-GO or PIVOT call.
+- **premortem**: Assumes the plan already failed six months from now and works backward to explain why, then gives top causes, tripwires and cheap changes to make now.
 - **pressure-test**: Quick five-voice stress test of a plan, proposal or decision, with an optional pre-mortem mode that assumes it failed and works backward.
 - **prompt-builder**: Rewrites a rough prompt into a stronger one (sharpen mode) or turns a repeated HR task into a reusable, tested prompt with an example and a check case (library mode).
+- **rca**: Root cause analysis for something that broke or behaved unexpectedly. Reproduces the problem, isolates one confirmed cause, sets a success check, and records a never-again rule.
 - **roi-estimate**: Builds a conservative, assumption-first estimate of the time or cost value of an AI use, shown as ranges with the assumptions listed.
 - **skill-writer**: Turns a repeated task into a new skill file with a name, trigger description, steps and output format.
 - **structured-interview-kit**: Builds a structured interview kit: competencies, consistent questions, behaviour-based probes and a scoring guide, so every candidate is judged the same way.
 - **training-session-designer**: Designs a short hands-on session that teaches HR colleagues to use AI safely and well, with exercises, a safety segment and a follow-up.
 - **vendor-ai-evaluation**: Builds a question list and scoring sheet for evaluating an HR technology or AI vendor: data location, bias testing evidence, retention, sub-processors, security, exit.
+- **what-must-be-true**: Turns a goal or promise into checkable conditions scored TRUE, FALSE or UNKNOWN, with a verdict and the cheapest next check.

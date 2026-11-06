@@ -1,6 +1,6 @@
 INSTRUCTIONS: CREATE MY HR AI SKILL LIBRARY
 
-Below are 27 skills. Each sits between markers like === SKILL: ai-use-case-intake === and === END SKILL: ai-use-case-intake ===. Each one is a complete skill file: a header block with a name and a description, then its steps. In the repository each lives in the Skills folder as <skill-name>.md.
+Below are 36 skills. Each sits between markers like === SKILL: ai-use-case-intake === and === END SKILL: ai-use-case-intake ===. Each one is a complete skill file: a header block with a name and a description, then its steps. In the repository each lives in the Skills folder as <skill-name>.md and also as skills/<skill-name>/SKILL.md.
 
 What to do:
 1. Create one skill for each, using whatever skill, custom agent, assistant, saved prompt or snippet feature this tool has.
@@ -8,7 +8,7 @@ What to do:
 3. If a skill with the same name already exists, ask me before overwriting it.
 4. If this tool has no way to create skills or agents, say so plainly in one sentence. Then fall back: keep each skill in this conversation as a named, callable instruction block. When I use a skill's name or type run <name> on: <text>, follow that skill exactly.
 5. Do not run any skill now. Only create or store them.
-6. When done, list every skill name with a one-line description. Then reply on the last line: Skills created: 27. If you used the fallback, reply: Skills stored: 27.
+6. When done, list every skill name with a one-line description. Then reply on the last line: Skills created: 36. If you used the fallback, reply: Skills stored: 36.
 
 The skills follow.
 
@@ -1362,3 +1362,476 @@ Uses discovery-interview-guide and training-session-designer.
 - Plain English. No hype.
 === END SKILL: onboarding-plan-builder ===
 
+=== SKILL: grilling ===
+---
+name: grilling
+description: "The AI interviews the user one hard question at a time to expose weak spots in an idea, plan or position. Use when the user says grill me, grilling, pressure interview, challenge my thinking, or interrogate this plan."
+---
+
+# Grilling: pressure interview
+
+Ask, do not tell. Find the weakest assumption by questioning, then stop and summarize.
+
+## When to use
+- The user wants to defend an idea before presenting it.
+- A plan feels solid but has not been questioned.
+
+## When to skip
+- The user wants a written critique (use pressure-test).
+
+## Inputs needed
+- The idea, plan or position in a few sentences.
+- Who will judge it.
+
+## Steps
+1. Restate the idea in one sentence and ask the user to confirm it.
+2. Ask ONE question at a time. Wait for the answer. Never ask two questions in one message.
+3. Order the questions: the claim (what exactly will happen), the evidence (how do you know), the alternative (what else explains it, what else could you do), the cost (what does it take and what does it risk), the failure (what would prove this wrong).
+4. If an answer is vague, ask a narrower follow-up. 'It depends' earns the question 'On what, and which case applies here?'
+5. If the user does not know, mark it UNKNOWN and move on. Do not supply an answer for them.
+6. Stop after at most 10 questions or when the weakest assumption is clear.
+7. Close with: the single weakest assumption, the evidence that would settle it, and the next step to get that evidence.
+
+## Quality bar
+- Tough but fair. No lecturing. No invented facts.
+
+## Output format
+Questions one at a time, then a closing summary of three lines.
+
+## If input is missing
+Ask for the idea and who will judge it.
+
+## Works with
+Follow with what-must-be-true or pressure-test on the improved plan.
+
+## Rules for every skill
+- Use only what the user gave. Do not invent facts, quotes, numbers or dates. Write UNKNOWN or [NEED FACT] instead.
+- If you are not sure, say so plainly. Never guess to look confident.
+- Plain English. No dashes used as punctuation breaks.
+- Never send, post or act on anything. Produce drafts for the user to decide on.
+=== END SKILL: grilling ===
+
+
+=== SKILL: humanize ===
+---
+name: humanize
+description: "Removes the recognizable habits of machine-written text without changing meaning. Use when the user says humanize this, make this read human, this sounds like AI, anti-AI pass, is this AI slop, or a draft reads machine-written."
+---
+
+# Humanize: remove AI tells
+
+Rewrite a draft so a careful reader would not suspect a machine wrote it. Meaning stays. Add nothing invented.
+
+## When to use
+- A draft has even rhythm, lists of three, stage directions or dramatic reveals.
+- A piece will be read by many people.
+
+## When to skip
+- The user wants a voice rewrite in their own style (use a voice-matching skill or your own style guide first).
+
+## Inputs needed
+- The draft.
+
+## Steps
+1. Keep a copy of the original so you can compare.
+2. Rhythm pass. Read aloud. No four or more consecutive sentences of about the same length. Include a very short sentence (under 6 words), a long one (over 25 words) and a single-sentence paragraph.
+3. Remove throat-clearing openers: Let's dive in, It's worth noting, In today's world, When it comes to, The truth is. Start with the point.
+4. Keep at most one list of exactly three per 300 words. Cut to two items or add a concrete example.
+5. Keep at most one 'not X, but Y' sentence in the whole piece.
+6. Rewrite colon reveals ('The best part: it learns') as plain statements.
+7. Cut staged insight: What nobody tells you, Here's the thing, The part everyone misses. Open with the insight.
+8. Replace puffed-up importance (a testament to, marks a pivotal moment, underscores the importance of) with the specific fact, or cut it.
+9. Replace pairs like 'the confusion and the overwhelm' with a verb or a concrete phrase.
+10. Cut closing recaps (In summary, To recap) or replace with one forward-looking line.
+11. Vary bullet shapes, or turn a same-shape list into a short paragraph.
+12. Replace dashes used as punctuation with a period, comma or colon.
+13. Keep-or-cut test: every sentence that stays must add something the reader did not already have.
+
+## Quality bar
+- Meaning unchanged. No invented detail: a humanized lie is still a lie.
+
+## Output format
+1 The cleaned draft. 2 The habits found, with one quoted example each. 3 Any sentence that claims something with no support in the draft, flagged for the user to verify.
+
+## If input is missing
+Ask for the draft.
+
+## Works with
+Run after any voice or style pass, and before sharing the draft.
+
+## Rules for every skill
+- Use only what the user gave. Do not invent facts, quotes, numbers or dates. Write UNKNOWN or [NEED FACT] instead.
+- If you are not sure, say so plainly. Never guess to look confident.
+- Plain English. No dashes used as punctuation breaks.
+- Never send, post or act on anything. Produce drafts for the user to decide on.
+=== END SKILL: humanize ===
+
+
+=== SKILL: lateral-leverage ===
+---
+name: lateral-leverage
+description: "Finds ways to repurpose or recombine what already exists before anyone builds or buys something new, then filters hard down to one to three survivors. Use when the user says lateral leverage, do more with less, what can we reuse, repurpose before we build, what are we missing, or we are stuck."
+---
+
+# Lateral leverage
+
+Do more by doing less with less. Before building or buying, ask what we already have that could do this job.
+
+## When to use
+- A plan calls for a new build, tool or purchase.
+- A team is stuck or out of ideas.
+- Any audit or project plan is being drafted.
+
+## When to skip
+- The outcome genuinely needs something new and reuse was already checked.
+
+## Inputs needed
+- The goal, asset or stuck point in one or two sentences.
+- Optional: the new build or purchase already proposed, which becomes the thing to beat.
+
+## Steps
+1. State the desired outcome in one line, without any solution in it. Mark any proposed build or purchase separately as the thing to beat.
+2. Inventory what already exists that touches the outcome: tools, licences, data, people, processes, idle capacity.
+3. Generate 5 to 8 candidate moves using five lenses in order: repurpose an asset for a different job, recombine two or more assets, borrow a pattern from another industry, invert the problem, use a capability already paid for but idle.
+4. Only after those are exhausted may a build-new or buy-new candidate enter, with a written reason why reuse cannot deliver.
+5. Filter hard. Kill anything unethical or illegal first. Score the rest 1 to 5 on money impact, speed to results, feasibility this week, repeatability, reversibility and avoiding new builds.
+6. Kill clever ideas with no plausible payoff. Rank survivors by outcome per unit of new stuff added.
+7. Keep the top 1 to 3 only.
+
+## Quality bar
+- An unfiltered idea list is a failure. Something must be cut.
+- 'Same thing, slightly better' is not a lateral move.
+- Never more than 3 survivors. A new build survives only with a written reason.
+- Ideas must fit the user's real situation, not generic brainstorming.
+
+## Output format
+Outcome and the thing to beat. Inventory (short list). For each survivor: the connection insight, the first action doable this week, and why it beats the obvious approach. Then one line listing what was cut and why.
+
+## If input is missing
+Ask one question: what is the goal or the thing we are stuck on, in one or two sentences?
+
+## Works with
+Run before what-must-be-true on any plan that needs a new build or purchase.
+
+## Rules for every skill
+- Use only what the user gave. Do not invent facts, quotes, numbers or dates. Write UNKNOWN or [NEED FACT] instead.
+- If you are not sure, say so plainly. Never guess to look confident.
+- Plain English. No dashes used as punctuation breaks.
+- Never send, post or act on anything. Produce drafts for the user to decide on.
+=== END SKILL: lateral-leverage ===
+
+
+=== SKILL: lessons-log ===
+---
+name: lessons-log
+description: "Turns a week of rough notes into a lessons log entry and decision records, then runs a 20-minute Friday review. Use when the user says lessons log, decision record, Friday review, write up my week, or record a decision."
+---
+
+# Lessons log, decision record and Friday review
+
+A pilot nobody can repeat is not a result. Write it down so someone else can follow. Use only what the user gives. Write UNKNOWN for missing fields and ask at the end.
+
+## When to use
+- End of a work week.
+- A real decision was just made.
+
+## When to skip
+- There is nothing to record yet.
+
+## Inputs needed
+- The user's rough notes for the week.
+
+## Steps
+1. LESSONS LOG ENTRY (one per week at most): Entry (week number and short title); Hypothesis (what was expected and what result would prove it wrong); What I did (people named by role, not by name); Measured (use and value, how, how many people); Result (compared with the baseline); Why (best explanation and what else could explain it); What I would change (one thing); Confidence (low, medium or high, and why); Steps to repeat (numbered); Made (template or checklist produced and where it lives); Decision it informed.
+2. DECISION RECORD (one per real decision): Decision and date; Options (the two or three that were real); Recommendation and why (the reason in the terms that drove it); Who decided; What would change it; Review date. A decision recorded without its reason is a fossil: the next person will invent a reason, wrongly.
+3. Run the 20-minute FRIDAY REVIEW one question at a time, waiting for each answer: (5 min) What did you expect this week and what happened? One line per hypothesis. (5 min) Show the drafted entry and ask for corrections. (5 min) Show the decision records and ask which real decisions are missing. (5 min) What is one thing to try next week and what would tell you it worked?
+4. If the user says 'skipped, capacity', write that in the log and stop.
+
+## Quality bar
+- Reasons recorded. Roles, not names. Steps repeatable by a stranger.
+
+## Output format
+The entry, the decision records, then the review questions.
+
+## If input is missing
+Ask for the week's notes.
+
+## Works with
+Follows adoption-check-in.
+
+## Rules for every skill
+- Use only what the user gave. Do not invent facts, quotes, numbers or dates. Write UNKNOWN or [NEED FACT] instead.
+- If you are not sure, say so plainly. Never guess to look confident.
+- Plain English. No dashes used as punctuation breaks.
+- Never send, post or act on anything. Produce drafts for the user to decide on.
+=== END SKILL: lessons-log ===
+
+
+=== SKILL: meeting-actions ===
+---
+name: meeting-actions
+description: "Turns messy meeting notes or a transcript into decisions, actions with owners, open questions, risks and a follow-up message. Use when the user says meeting notes, action items, summarize this meeting, or pastes a transcript."
+---
+
+# Meeting notes to actions
+
+Report only what was said. Never assign an action unless the notes show the person agreed. Write UNKNOWN for a missing owner or date.
+
+## When to use
+- Notes, a transcript or a voice dump need a clean record and follow-ups.
+
+## When to skip
+- The user wants an opinion on the meeting.
+
+## Inputs needed
+- The notes or transcript.
+- Attendees by role.
+- The purpose of the meeting in one line.
+
+## Steps
+1. PURPOSE: one sentence.
+2. DECISIONS: a numbered list of what was decided in plain words. If the group seemed to agree but nobody said so, put it under OPEN QUESTIONS.
+3. ACTIONS: a table with Action | Owner | Due date | Source line (a short quote). UNKNOWN where not stated.
+4. OPEN QUESTIONS: raised and not settled, each with who might answer.
+5. RISKS AND CONCERNS: only those someone voiced.
+6. WHAT I INFERRED: anything concluded rather than read, each labeled as inference.
+7. FOLLOW-UP MESSAGE: a short plain note to attendees that confirms decisions and actions and invites corrections. Under 120 words, first person, no dashes as punctuation.
+8. End by asking: What did I miss? Who needs to see this who was not in the room?
+
+## Quality bar
+- Nothing invented. Every action traceable to a quote.
+
+## Output format
+The seven parts above in order.
+
+## If input is missing
+Ask for the notes. Attendees and purpose are optional.
+
+## Works with
+Feeds lessons-log and employee-comms-draft.
+
+## Rules for every skill
+- Use only what the user gave. Do not invent facts, quotes, numbers or dates. Write UNKNOWN or [NEED FACT] instead.
+- If you are not sure, say so plainly. Never guess to look confident.
+- Plain English. No dashes used as punctuation breaks.
+- Never send, post or act on anything. Produce drafts for the user to decide on.
+=== END SKILL: meeting-actions ===
+
+
+=== SKILL: prd ===
+---
+name: prd
+description: "A short project brief written before work starts: goal, who it is for, what is in, what is explicitly not in, success measure, risks, and a GO, NO-GO or PIVOT call. Use when the user says prd, project brief, brief this, spec this before we start, scope this, or I have an idea for."
+---
+
+# Project brief (PRD)
+
+Decide what will NOT be done before deciding what will. The cheapest project is the one correctly stopped.
+
+## When to use
+- A project, tool, page or process is about to start and no written scope exists.
+- The work will take more than one session or has real users.
+
+## When to skip
+- A quick, reversible fix finished in one sitting.
+
+## Inputs needed
+- The raw idea in a sentence or two.
+- Known limits: budget, deadline, required tools, who must approve.
+- Any proof people want it: a request, a waitlist, a paying customer.
+
+## Steps
+1. Check whether similar work already exists. If so, say so and prefer improving it. If none is found, say 'I did not find prior work', never 'it does not exist'.
+2. Write the verdict first: GO, NO-GO or PIVOT, in one line. If NO-GO, stop and give the reason.
+3. Goal: the one problem and the one person it helps. One sentence each.
+4. Hard limits: the walls that cannot move.
+5. NOT in scope: at least three named exclusions, each with a one-line reason. Write this before the in-scope list.
+6. In scope: what will be delivered the first time, and nothing more.
+7. Success measure: a number, rate or observable event, not a feeling.
+8. Risks: the top three ways this goes wrong, with a mitigation or an accepted risk.
+9. Open questions that must be answered before work starts.
+10. Parking lot: good ideas that did not make the cut, kept for later.
+
+## Quality bar
+- Fewer than three exclusions means scope is not thought through. Go back.
+- The in-scope list is locked once written. New scope means a new brief.
+- No demand proof means say so loudly.
+
+## Output format
+One page: Verdict, Goal, Who it is for, Hard limits, NOT in scope, In scope, Success measure, Risks, Open questions, Parking lot.
+
+## If input is missing
+Ask one clarifying question about the idea, then proceed.
+
+## Works with
+Run lateral-leverage first to check reuse. Follow with premortem before committing.
+
+## Rules for every skill
+- Use only what the user gave. Do not invent facts, quotes, numbers or dates. Write UNKNOWN or [NEED FACT] instead.
+- If you are not sure, say so plainly. Never guess to look confident.
+- Plain English. No dashes used as punctuation breaks.
+- Never send, post or act on anything. Produce drafts for the user to decide on.
+=== END SKILL: prd ===
+
+
+=== SKILL: premortem ===
+---
+name: premortem
+description: "Assumes the plan already failed six months from now and works backward to explain why, then gives top causes, tripwires and cheap changes to make now. Use when the user says premortem, pre-mortem, premortem this, imagine this failed, or what would kill this plan."
+---
+
+# Premortem
+
+It is six months from now and the plan died. Explain how, while there is still time to change it.
+
+## When to use
+- Money, time, people or reputation are committed and the decision is hard to reverse.
+- A plan feels certain and nobody has tried to break it.
+
+## When to skip
+- The decision is small or easy to undo.
+- The user wants a balanced verdict (use pressure-test, or hr-ai-council for a high-stakes people decision).
+
+## Inputs needed
+- The plan in the user's words.
+- The finish date.
+- The success definition: what winning looks like.
+
+## Steps
+1. Restate the plan in one line with its finish date and success definition.
+2. Write five retrospective voices, each in the past tense. Not 'could fail' but 'failed, and here is why'.
+3. Contrarian: the chain of events that killed it.
+4. First Principles Thinker: the one assumption nobody wrote down.
+5. Outsider: what an observer saw coming that insiders ignored.
+6. Expansionist: what was never tried that would have saved it.
+7. Executor: the earliest warning sign that was ignored, and the week it appeared.
+8. TOP THREE CAUSES, ranked by likelihood times damage.
+9. TRIPWIRES: for each cause, one observable signal and a date to check it.
+10. WHAT TO CHANGE NOW: three cheap changes.
+11. WHAT TO STOP BELIEVING: one comfortable belief to try to break this week.
+
+## Quality bar
+- Under 600 words in total.
+- Past tense in the five voices.
+- Every cause the user has not confirmed is labeled UNVERIFIED, with a way to check it.
+- Tripwires are things someone can actually see, not feelings.
+
+## Output format
+Five short voice sections, then TOP THREE CAUSES, TRIPWIRES, WHAT TO CHANGE NOW, WHAT TO STOP BELIEVING.
+
+## If input is missing
+Ask for the plan. Ask for the finish date and the success definition. Do not guess either.
+
+## Works with
+Run after what-must-be-true. pressure-test includes a pre-mortem mode; this skill goes deeper on one failure story.
+
+## Rules for every skill
+- Use only what the user gave. Do not invent facts, quotes, numbers or dates. Write UNKNOWN or [NEED FACT] instead.
+- If you are not sure, say so plainly. Never guess to look confident.
+- Plain English. No dashes used as punctuation breaks.
+- Never send, post or act on anything. Produce drafts for the user to decide on.
+=== END SKILL: premortem ===
+
+
+=== SKILL: rca ===
+---
+name: rca
+description: "Root cause analysis for something that broke or behaved unexpectedly. Reproduces the problem, isolates one confirmed cause, sets a success check, and records a never-again rule. Use when the user says rca, root cause, why did this break, incident review, or post-incident."
+---
+
+# RCA: root cause analysis
+
+No fix until the root cause is confirmed in writing.
+
+## When to use
+- Something broke, behaved unexpectedly, or failed silently and the cause is not yet known.
+- A fix was already tried and did not hold.
+
+## When to skip
+- The cause is already known and proven.
+- A simple local bug that can be traced step by step (use ordinary debugging).
+
+## Inputs needed
+- The exact symptom: an error message, a log line, or what was seen.
+- Which system or process is affected.
+- Any earlier fixes tried, and what happened.
+
+## Steps
+1. Check whether this has happened before. If prior notes exist, read them first. If none are found, say 'I did not find a prior incident', never 'this has never happened'.
+2. Reproduce. Treat the report as untrustworthy until you have made the failure happen yourself. Check: is it already fixed on the current version, is it already being tracked, can it be reproduced at all.
+3. Write two lines: Symptom confirmed (an exact quote) and Repro (the exact steps and what was observed). If it cannot be reproduced, write UNREPRODUCED and hand it to a person with what was tried.
+4. Isolate. Read the suspect source, search for the error, run one targeted check. Diagnosis only, no edits.
+5. Write one line: Root cause, one sentence, with the location if known.
+6. Propose a success check: a specific action and the result that proves it is fixed. Ask the user to confirm it.
+7. Fix, then run the success check. If it fails twice, stop and bring in a second pair of eyes with a summary of every attempt.
+8. Write the handoff: root cause, fix applied, success check and its actual result, and one never-again rule.
+
+## Quality bar
+- The root cause is one sentence, not a list of suspects.
+- A stored failure reason is not proof. Re-run before trusting an old error note.
+- If two earlier fixes on the same area already failed, run premortem on the proposed fix first.
+
+## Output format
+Symptom, Repro, Root cause, Success check, Fix applied, Result, Never-again rule.
+
+## If input is missing
+Ask for the exact symptom in one sentence. Do not start from a guess.
+
+## Works with
+Pairs with premortem when earlier fixes failed.
+
+## Rules for every skill
+- Use only what the user gave. Do not invent facts, quotes, numbers or dates. Write UNKNOWN or [NEED FACT] instead.
+- If you are not sure, say so plainly. Never guess to look confident.
+- Plain English. No dashes used as punctuation breaks.
+- Never send, post or act on anything. Produce drafts for the user to decide on.
+=== END SKILL: rca ===
+
+
+=== SKILL: what-must-be-true ===
+---
+name: what-must-be-true
+description: "Turns a goal or promise into checkable conditions scored TRUE, FALSE or UNKNOWN, with a verdict and the cheapest next check. Use when the user says what must be true, precondition check, premise test, reality-check this plan, is this realistic, or says if we do X we will get Y."
+---
+
+# What must be true
+
+A goal is a hope until its conditions are named and checked. Test the goal.
+
+## When to use
+- A plan promises a number, a date or a saving and someone must decide whether to back it.
+
+## When to skip
+- The conditions are already known and verified.
+
+## Inputs needed
+- The goal in the user's words.
+- Any evidence in hand: numbers, past results, constraints.
+
+## Steps
+1. Restate the goal as one falsifiable line with a number and a timeframe. If the user gave neither, add placeholders and say which to confirm.
+2. Scan six categories before writing conditions: Reach, Conversion (realistic rates, not best case), Capacity, Time, Resources, Precedent.
+3. Write each condition as ONE checkable sentence. 'Strong execution' fails. 'We have a channel that reaches about 10,000 relevant people before the deadline' passes.
+4. Label each condition LOAD-BEARING (the plan fails without it) or NICE-TO-HAVE.
+5. Score each load-bearing condition. TRUE only with evidence stated in a clause. FALSE with what would have to change. UNKNOWN with the fastest concrete check. Never treat UNKNOWN as a pass.
+6. Verdict from load-bearing rows only: GO (all TRUE), BLOCKED (at least one FALSE), UNVERIFIED (no FALSE, at least one UNKNOWN). UNVERIFIED does not mean probably fine.
+7. Name the single cheapest check that would move the verdict most.
+
+## Quality bar
+- No invented evidence. Every UNKNOWN has a named check.
+
+## Output format
+A table: Condition | Status | Evidence or check needed | Impact if FALSE. Then Verdict (one line), Highest-leverage next check (one line), and the nice-to-haves as a plain list.
+
+## If input is missing
+Ask for the goal. Ask for evidence only if it is not given; otherwise mark UNKNOWN.
+
+## Works with
+Run before pressure-test or hr-ai-council on any growth, capacity or saving claim.
+
+## Rules for every skill
+- Use only what the user gave. Do not invent facts, quotes, numbers or dates. Write UNKNOWN or [NEED FACT] instead.
+- If you are not sure, say so plainly. Never guess to look confident.
+- Plain English. No dashes used as punctuation breaks.
+- Never send, post or act on anything. Produce drafts for the user to decide on.
+=== END SKILL: what-must-be-true ===
