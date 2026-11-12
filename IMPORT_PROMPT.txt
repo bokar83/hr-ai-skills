@@ -1,6 +1,6 @@
 INSTRUCTIONS: CREATE MY HR AI SKILL LIBRARY
 
-Below are 36 skills. Each sits between markers like === SKILL: ai-use-case-intake === and === END SKILL: ai-use-case-intake ===. Each one is a complete skill file: a header block with a name and a description, then its steps. In the repository each lives in the Skills folder as <skill-name>.md and also as skills/<skill-name>/SKILL.md.
+Below are 41 skills. Each sits between markers like === SKILL: ai-use-case-intake === and === END SKILL: ai-use-case-intake ===. Each one is a complete skill file: a header block with a name and a description, then its steps. In the repository each lives in the Skills folder as <skill-name>.md and also as skills/<skill-name>/SKILL.md.
 
 What to do:
 1. Create one skill for each, using whatever skill, custom agent, assistant, saved prompt or snippet feature this tool has.
@@ -8,7 +8,7 @@ What to do:
 3. If a skill with the same name already exists, ask me before overwriting it.
 4. If this tool has no way to create skills or agents, say so plainly in one sentence. Then fall back: keep each skill in this conversation as a named, callable instruction block. When I use a skill's name or type run <name> on: <text>, follow that skill exactly.
 5. Do not run any skill now. Only create or store them.
-6. When done, list every skill name with a one-line description. Then reply on the last line: Skills created: 36. If you used the fallback, reply: Skills stored: 36.
+6. When done, list every skill name with a one-line description. Then reply on the last line: Skills created: 41. If you used the fallback, reply: Skills stored: 41.
 
 The skills follow.
 
@@ -1835,3 +1835,300 @@ Run before pressure-test or hr-ai-council on any growth, capacity or saving clai
 - Plain English. No dashes used as punctuation breaks.
 - Never send, post or act on anything. Produce drafts for the user to decide on.
 === END SKILL: what-must-be-true ===
+
+=== SKILL: brevity-edit ===
+---
+name: brevity-edit
+description: "Cuts a long or rambling draft down to a sharp, scannable version for busy leaders or front-line managers, or builds a three-part short brief from a topic. Use when the user says tighten this, make this scannable, cut the clutter, shorten this for executives, or simplify this for managers."
+---
+
+# Brevity edit
+
+Say it in fewer words without losing the point. Two jobs: edit a draft, or build a short brief from a topic.
+
+## When to use
+- A message, update or memo is longer than the reader will read.
+- You need a short brief on a topic for a leader.
+- A manager update has the main point buried in the third paragraph.
+
+## When to skip
+- The decision itself is still open. Use executive-brief to frame the ask first.
+- The text is a policy or legal wording that must stay exact.
+
+## Inputs needed
+- Edit mode: the draft.
+- Brief mode: a headline or topic, and the facts you have.
+- The reader: senior leaders (want the decision and the cost) or front-line managers (want what to do and by when).
+- The one thing the reader must remember.
+
+## Steps
+1. Pick the mode. If unclear, ask which.
+2. If the reader is not stated, ask. Do not guess, because the framing differs.
+3. Apply these six rules:
+   1. Start with the reader's goal: what is new, useful or urgent for them.
+   2. Open with a short lead under 60 characters, concrete and plain.
+   3. First sentence says what it is and why it matters.
+   4. Use everyday words, as if talking in a hallway.
+   5. Make it scannable: short paragraphs, bullets where they help, one bolded line for the key point.
+   6. Stop when it is clear. Cut anything that repeats.
+4. Cut jargon and filler: delve, landscape, robust, synergy, paradigm, leverage (as a verb), in today's fast-paced world, it is important to note. Drop rhetorical question openers. Use periods or commas, not dashes.
+5. EDIT MODE: return the shorter draft. Add one line listing the biggest changes only if three or more were not obvious.
+6. BRIEF MODE: return exactly three parts. Subhead: one sentence that adds context to the headline. Why it matters: one or two sentences on relevance, without repeating the headline. Data points: two or three bullets, each with its source in brackets. If there is no source, write [SOURCE NEEDED]. Never invent a figure.
+7. Check the result against the original: nothing added, no meaning changed.
+
+## Quality bar
+- Shorter, same meaning, nothing invented.
+- The first line works alone.
+
+## Output format
+Edit mode: the revised draft, then an optional one-line note of changes. Brief mode: Subhead, Why it matters, Data points.
+
+## If input is missing
+Ask for the draft or topic, and the reader.
+
+## Works with
+Pairs with executive-brief and employee-comms-draft. Run humanize last if the text still reads machine-written.
+
+## Rules for every skill
+- Use only what the user gave. Do not invent facts, quotes, numbers or dates. Write UNKNOWN or [NEED FACT] instead.
+- If you are not sure, say so plainly. Never guess to look confident.
+- Plain English. No dashes used as punctuation breaks.
+- Never send, post or act on anything. Produce drafts for the user to decide on.
+=== END SKILL: brevity-edit ===
+
+=== SKILL: build-quality-audit ===
+---
+name: build-quality-audit
+description: "Audits a prompt, agent, workflow or automation against ten quality principles before it is shared or relied on, with PASS, WARN or FAIL per principle. Use when the user says audit this agent, review this workflow, is this ready to share, quality check this build, or before shipping."
+---
+
+# Build quality audit
+
+A ten-point check for anything you built with AI that other people will rely on. It finds the problems before your colleagues do.
+
+## When to use
+- An agent, prompt, workflow, template or automation is about to be shared.
+- Something you built keeps giving uneven results.
+- You changed a working build and want to confirm nothing else broke.
+
+## When to skip
+- The build is a one-off for your own use and no one else will see the result.
+- Something already broke and you need the cause. Use rca.
+
+## Inputs needed
+- The build itself: the prompt text, the steps, or a description of the workflow.
+- What it is supposed to do, in one sentence, and who uses it.
+- Two or three real or realistic test inputs and the outputs they produced, if you have them.
+
+## Steps
+1. State the goal of the build in one sentence and the done-condition: how a person would check that it worked. If the goal is unclear, ask one question and stop.
+2. Score each principle PASS, WARN or FAIL, with one line of evidence quoted from the build:
+   1. Think first: assumptions are written down, open questions were asked, not guessed.
+   2. Simplicity: it is the smallest build that meets the goal. No extra steps, options or features nobody asked for.
+   3. Surgical changes: the last edit touched only what had to change. Nothing unrelated was reworded or restructured.
+   4. Clear goal: there is a stated, checkable done-condition, and the build loops back when the result does not match it.
+   5. Hot spots: nothing repeats the same work, loops without an end, or forces the user to re-enter the same input.
+   6. Verification: there is at least one test input with a known good answer, and the build was run against it. Feels fine is not a test.
+   7. Failure handling: the build says what to do on an error or an empty input, instead of guessing.
+   8. Dependencies: every tool, file, data source or link it needs is named. Each one is something the user will really have, and each one adds risk.
+   9. Honest communication: where the build is unsure, it says so plainly. It never presents a guess as a fact.
+   10. Common failure patterns: no kitchen sink (everything added), no wrong abstraction (a general tool for one job), no optimistic path (only the happy case tested), no runaway rewrite (a small fix that became a full redo).
+3. For every FAIL or WARN, write the exact change needed, in one sentence.
+4. Give a call: READY, READY AFTER FIXES (list them), or NOT READY.
+5. Say what you could not check from what was supplied.
+
+## Quality bar
+- Every score cites the build. No score without evidence.
+- Fixes are specific changes, not advice like improve clarity.
+
+## Output format
+A table: Principle | Status | Evidence | Fix. Then the call, then what could not be checked.
+
+## If input is missing
+Ask for the build and its goal. If there are no test inputs, mark principle 6 as FAIL and say why.
+
+## Works with
+Run after prompt-builder or skill-writer and before sharing. Use rca if something already went wrong. Pairs with ai-output-verifier for checking the outputs.
+
+## Rules for every skill
+- Use only what the user gave. Do not invent facts, quotes, numbers or dates. Write UNKNOWN or [NEED FACT] instead.
+- If you are not sure, say so plainly. Never guess to look confident.
+- Plain English. No dashes used as punctuation breaks.
+- Never send, post or act on anything. Produce drafts for the user to decide on.
+=== END SKILL: build-quality-audit ===
+
+=== SKILL: demand-check ===
+---
+name: demand-check
+description: "Tests whether anyone actually wants an idea before it gets built, then returns SCRATCH, PIVOT or GO plus an action plan. Use when the user says is this worth building, demand check, should we build this agent, will anyone use this, or validate this idea."
+---
+
+# Demand check
+
+Find out whether real people want this before anyone spends weeks building it. A fast honest no is a good result.
+
+## When to use
+- Someone proposes a new HR AI agent, tool, template pack, training or service.
+- Several ideas compete for the same build time.
+- You are excited about an idea and want a cold read before committing.
+
+## When to skip
+- The idea is already validated and the question is how to build it. Use prd.
+- The question is whether AI fits a task. Use ai-use-case-intake.
+
+## Inputs needed
+- The idea in one or two sentences: what it is, and who it is for.
+- Any evidence of demand already in hand (requests received, questions asked, workarounds people use today). If none, say none.
+- Type of idea: a tool or agent, content, a reusable asset, or a service. If unclear, treat it as a service.
+
+## Steps
+1. Restate the idea and the intended user in one sentence each. Ask one question if either is unclear, then stop.
+2. Ethics gate. If the idea is illegal, deceptive or harms the people it touches, stop and say so. No score, no plan.
+3. Demand veto. List the evidence that real people want this. Count only these as evidence: a person asked for it, a person pays or spends time on a workaround today, a person gave a real commitment (time, money, reputation). Do not count compliments, general interest or your own belief. If there is no evidence, the verdict is SCRATCH unless step 4 finds a better target.
+4. Reframe once. Ask whether a nearby group, a nearby problem or an existing thing with a fixable gap has stronger demand. A reframe must pass step 3 on its own evidence. It never overrides a true no.
+5. Competition and substitutes. Name what people use today instead, including doing nothing. State the gap this idea fills.
+6. Value check. State what the user gains in time, quality or risk, as a range with assumptions listed.
+7. Smallest test. Describe the cheapest way to get real demand evidence this week, such as five short conversations about their past experience (not their opinion of your idea), a one-page offer, or a sign-up list.
+8. Verdict: SCRATCH (no demand evidence), PIVOT (demand exists for a different shape), or GO (evidence supports building the smallest version).
+9. Action plan, always. For SCRATCH or PIVOT: the ordered changes that would make it viable. For GO: the highest-leverage moves that turn a pass into a win, plus the one thing NOT to build yet.
+
+## Quality bar
+- Every claim of demand points to something the user supplied, or says UNKNOWN.
+- The verdict follows from step 3, not from how good the idea sounds.
+
+## Output format
+1 The idea and user (two lines). 2 Evidence table: Evidence | Counts or not | Why. 3 Substitutes and gap. 4 Verdict in one line. 5 Smallest test. 6 Action plan, numbered.
+
+## If input is missing
+Ask for the idea and who it is for. If there is no evidence of demand, proceed and mark it UNKNOWN rather than asking for more.
+
+## Works with
+Run before prd. Pairs with what-must-be-true for the conditions behind a GO, and pressure-test for a second opinion.
+
+## Rules for every skill
+- Use only what the user gave. Do not invent facts, quotes, numbers or dates. Write UNKNOWN or [NEED FACT] instead.
+- If you are not sure, say so plainly. Never guess to look confident.
+- Plain English. No dashes used as punctuation breaks.
+- Never send, post or act on anything. Produce drafts for the user to decide on.
+=== END SKILL: demand-check ===
+
+=== SKILL: hr-chart-rules ===
+---
+name: hr-chart-rules
+description: "Chooses the right chart for HR data and sets the rules for labels, colour, scale and small groups, so a chart tells the truth at a glance. Use when the user says what chart should I use, make this chart clearer, chart rules, dashboard layout, or how to show headcount, attrition or survey results."
+---
+
+# HR chart rules
+
+Pick the chart that answers the question, then make it honest and readable. Output is a chart specification you can build in any tool, not a picture.
+
+## When to use
+- You have HR numbers (headcount, attrition, hiring time, survey scores, training completion) and need to show them.
+- A dashboard or slide has too many charts, or the chart is hard to read.
+- You are reviewing a chart someone else made.
+
+## When to skip
+- You need the analysis itself, with protection for small groups. Use hr-data-insights first.
+- The audience needs one number. Show the number, not a chart.
+
+## Inputs needed
+- The question the chart must answer, in one sentence.
+- The data described in words or as a small table (use made-up or aggregated figures, not individual records).
+- Who will read it and where (slide, report, dashboard, printout).
+
+## Steps
+1. Write the one message the reader should take away. If there are two messages, plan two charts.
+2. Choose the form from the question:
+   - Compare categories: horizontal bars, sorted by value unless the categories have a natural order.
+   - Change over time: a line for many periods, columns for a few.
+   - Part of a whole: a single stacked bar or a table. Use a pie only for two or three parts, never more.
+   - Distribution: a histogram or a simple range band.
+   - Relationship between two measures: a scatter plot.
+   - Exact values matter: a table.
+3. Set the axes. Bars start at zero. Lines may start elsewhere only if the axis is labelled clearly. Never cut an axis to make a change look bigger.
+4. Label directly. Put the title as the finding (Attrition fell 3 points in Q3), not the topic (Attrition). Label lines and bars on the chart instead of a distant legend. Name units and the time period.
+5. Colour with purpose. Use one neutral colour for everything, and one accent for the point you want seen. Do not use red and green alone to separate groups, because many people cannot tell them apart. Check that the chart still reads in greyscale.
+6. Protect people. If a group is smaller than the minimum your company sets (often five or ten), combine it or hide it. Never chart a group so small that an individual can be identified.
+7. Remove clutter: no 3D, no heavy gridlines, no decoration, no second axis unless it is unavoidable.
+8. Add a source line and the date of the data. Add one caveat if the data is partial.
+9. Give a test: show the chart to someone for five seconds. They should say the message back.
+
+## Quality bar
+- One message per chart. Every number on the chart comes from the data supplied.
+- No invented values. Use placeholders if figures are missing.
+
+## Output format
+1 The message. 2 Chart type and why. 3 Specification: title, axes, labels, colours, order, notes. 4 Small-group check. 5 A short list of what to cut. 6 The five-second test.
+
+## If input is missing
+Ask for the question and the audience. If the data is missing, give the specification with [NEED FACT] placeholders.
+
+## Works with
+Run after hr-data-insights. Use executive-brief to write the text that goes with the chart.
+
+## Rules for every skill
+- Use only what the user gave. Do not invent facts, quotes, numbers or dates. Write UNKNOWN or [NEED FACT] instead.
+- If you are not sure, say so plainly. Never guess to look confident.
+- Plain English. No dashes used as punctuation breaks.
+- Never send, post or act on anything. Produce drafts for the user to decide on.
+=== END SKILL: hr-chart-rules ===
+
+=== SKILL: project-status-report ===
+---
+name: project-status-report
+description: "Turns the status facts you supply into a one-page project scorecard: on track, at risk or late for each item, what is late and why, and the decisions needed. Use when the user says status report, project scorecard, where are we late, weekly update, or are we on track."
+---
+
+# Project status report
+
+One page that shows where a project stands and what needs a decision. Built only from the facts you give it.
+
+## When to use
+- You run a pilot, rollout or workstream and owe a regular update.
+- You need to see quickly which items are slipping.
+- A sponsor asks are we on track and you want a straight answer.
+
+## When to skip
+- The project has no plan or dates yet. Use prd or pilot-design first.
+- You need a root cause for a failure. Use rca.
+
+## Inputs needed
+- The plan: items or milestones with owner role and due date.
+- Current state of each item: done, in progress, not started, or blocked, with any numbers (for example sessions delivered against target).
+- Today's date.
+- Open risks and any decisions waiting on someone.
+
+## Steps
+1. Restate the project goal in one sentence and the date being reported on.
+2. For each item, set a status from the facts given:
+   - DONE: finished, with evidence.
+   - ON TRACK: started and pace matches the plan.
+   - AT RISK: pace is behind, a dependency is missing, or no update is available.
+   - LATE: past the due date and not done.
+   - NO DATA: nothing was supplied. This counts as a warning, not a pass.
+3. For numeric targets, do the pace arithmetic in plain view: target, actual so far, share of time elapsed, the pace needed from now to finish. Show the numbers. If an input is missing, mark NO DATA, do not estimate.
+4. List what is late or at risk, each with a cause if known and one proposed next step. Mark unknown causes as UNKNOWN.
+5. List decisions needed: what, from which role, by when.
+6. List the top three risks with an early warning sign each.
+7. Give an overall call: ON TRACK, AT RISK or OFF TRACK, with one sentence of reason that follows from the item statuses.
+8. Add a line for what changed since the last report, if a previous status was supplied.
+
+## Quality bar
+- Every status traces to a fact you were given. Empty fields are NO DATA, not green.
+- Numbers are shown with their working so a reader can check them.
+
+## Output format
+1 Goal and date. 2 Overall call. 3 Table: Item | Owner role | Due | Status | Note. 4 Pace numbers. 5 Late or at risk. 6 Decisions needed. 7 Top three risks. 8 What changed.
+
+## If input is missing
+Ask for the plan and today's date. For any item without an update, report NO DATA.
+
+## Works with
+Use executive-brief to compress it for a leader. Pairs with lessons-log for the end of the project and adoption-check-in for people-side signals.
+
+## Rules for every skill
+- Use only what the user gave. Do not invent facts, quotes, numbers or dates. Write UNKNOWN or [NEED FACT] instead.
+- If you are not sure, say so plainly. Never guess to look confident.
+- Plain English. No dashes used as punctuation breaks.
+- Never send, post or act on anything. Produce drafts for the user to decide on.
+=== END SKILL: project-status-report ===

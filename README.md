@@ -6,7 +6,7 @@ Maintained by Boubacar Barry.
 
 ## What is in here
 
-36 skills in the open skill format. Each skill is provided in two layouts with identical content: a flat file in the Skills folder (Skills/<skill-name>.md) and a folder per skill (skills/<skill-name>/SKILL.md), so tools that import from either layout can read them. Every skill has a name and a description. Each skill says when to use it, what it needs, the steps, the output, and what to do when information is missing. Every skill follows the same rules: say UNKNOWN instead of guessing, draft only and never send, use roles not names.
+41 skills in the open skill format. Each skill is provided in two layouts with identical content: a flat file in the Skills folder (Skills/<skill-name>.md) and a folder per skill (skills/<skill-name>/SKILL.md), so tools that import from either layout can read them. Every skill has a name and a description. Each skill says when to use it, what it needs, the steps, the output, and what to do when information is missing. Every skill follows the same rules: say UNKNOWN instead of guessing, draft only and never send, use roles not names.
 
 ### Decide and assess
 
@@ -21,6 +21,7 @@ Maintained by Boubacar Barry.
 - **premortem**: Assumes the plan already failed six months from now and works backward to explain why, then gives top causes, tripwires and cheap changes to make now.
 - **what-must-be-true**: Turns a goal or promise into checkable conditions scored TRUE, FALSE or UNKNOWN, with a verdict and the cheapest next check.
 - **grilling**: The AI interviews the user one hard question at a time to expose weak spots in an idea, plan or position.
+- **demand-check**: Tests whether anyone wants an idea before it gets built, then gives a SCRATCH, PIVOT or GO verdict and an action plan.
 
 ### Plan, pilot and roll out
 
@@ -30,6 +31,7 @@ Maintained by Boubacar Barry.
 - **ai-use-policy-draft**: Drafts a plain-English AI acceptable-use policy for HR staff or employees from the facts the user supplies, with open questions marked.
 - **discovery-interview-guide**: Prepares questions for a conversation with a stakeholder, employee group or new manager to learn how work really happens and what AI could help or harm.
 - **prd**: A short project brief written before work starts: goal, who it is for, what is in, what is explicitly not in, success measure, risks, and a GO, NO-GO or PIVOT call.
+- **project-status-report**: Turns the status facts you supply into a one-page scorecard: on track, at risk or late per item, what is late and why, and decisions needed.
 
 ### Drive adoption and learn
 
@@ -46,6 +48,8 @@ Maintained by Boubacar Barry.
 - **hr-data-insights**: Guides safe analysis of HR data with AI: protecting small groups, avoiding individual conclusions, stating caveats and checking the numbers.
 - **prompt-builder**: Rewrites a rough prompt into a stronger one (sharpen mode) or turns a repeated HR task into a reusable, tested prompt with an example and a check case (library mode).
 - **skill-writer**: Turns a repeated task into a new skill file with a name, trigger description, steps and output format.
+- **build-quality-audit**: Audits a prompt, agent or workflow against ten quality principles before it is shared, with PASS, WARN or FAIL and the exact fix for each.
+- **hr-chart-rules**: Chooses the right chart for HR data and sets rules for labels, colour, scale and small groups so the chart tells the truth at a glance.
 
 ### Everyday HR drafting
 
@@ -58,6 +62,7 @@ Maintained by Boubacar Barry.
 - **executive-brief**: Compresses any HR or AI update into a short brief that lets a leader decide fast (headline, why it matters, the ask), or turns meeting notes into decisions and owned actions.
 - **humanize**: Removes the recognizable habits of machine-written text without changing meaning.
 - **meeting-actions**: Turns messy meeting notes or a transcript into decisions, actions with owners, open questions, risks and a follow-up message.
+- **brevity-edit**: Cuts a long draft to a sharp, scannable version for leaders or front-line managers, or builds a three-part short brief from a topic.
 
 ## How to import
 
