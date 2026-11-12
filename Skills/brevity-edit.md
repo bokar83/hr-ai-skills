@@ -27,14 +27,14 @@ Say it in fewer words without losing the point. Two jobs: edit a draft, or build
 2. If the reader is not stated, ask. Do not guess, because the framing differs.
 3. Apply these six rules:
    1. Start with the reader's goal: what is new, useful or urgent for them.
-   2. Open with a short lead under 60 characters, concrete and plain.
+   2. If there is a headline or subject line, keep it under 60 characters, concrete and plain. Do not add new content to do this.
    3. First sentence says what it is and why it matters.
    4. Use everyday words, as if talking in a hallway.
    5. Make it scannable: short paragraphs, bullets where they help, one bolded line for the key point.
    6. Stop when it is clear. Cut anything that repeats.
 4. Cut jargon and filler: delve, landscape, robust, synergy, paradigm, leverage (as a verb), in today's fast-paced world, it is important to note. Drop rhetorical question openers. Use periods or commas, not dashes.
-5. EDIT MODE: return the shorter draft. Add one line listing the biggest changes only if three or more were not obvious.
-6. BRIEF MODE: return exactly three parts. Subhead: one sentence that adds context to the headline. Why it matters: one or two sentences on relevance, without repeating the headline. Data points: two or three bullets, each with its source in brackets. If there is no source, write [SOURCE NEEDED]. Never invent a figure.
+5. EDIT MODE: return the shorter draft. Add one line naming the biggest changes only if a point was removed or moved.
+6. BRIEF MODE: return exactly three parts. Subhead: one sentence that adds context to the headline. Why it matters: one or two sentences on relevance, without repeating the headline. Data points: up to three bullets, each with its source in brackets. If there is no source, write [SOURCE NEEDED]. If fewer facts were given, use fewer bullets. Never invent a figure.
 7. Check the result against the original: nothing added, no meaning changed.
 
 ## Quality bar

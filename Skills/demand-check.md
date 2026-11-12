@@ -27,10 +27,10 @@ Find out whether real people want this before anyone spends weeks building it. A
 3. Demand veto. List the evidence that real people want this. Count only these as evidence: a person asked for it, a person pays or spends time on a workaround today, a person gave a real commitment (time, money, reputation). Do not count compliments, general interest or your own belief. If there is no evidence, the verdict is SCRATCH unless step 4 finds a better target.
 4. Reframe once. Ask whether a nearby group, a nearby problem or an existing thing with a fixable gap has stronger demand. A reframe must pass step 3 on its own evidence. It never overrides a true no.
 5. Competition and substitutes. Name what people use today instead, including doing nothing. State the gap this idea fills.
-6. Value check. State what the user gains in time, quality or risk, as a range with assumptions listed.
+6. Value check. State what the user would gain in time, quality or risk. Use only figures the user supplied, as a range with the assumptions listed. If none were supplied, write UNKNOWN and say what number is needed.
 7. Smallest test. Describe the cheapest way to get real demand evidence this week, such as five short conversations about their past experience (not their opinion of your idea), a one-page offer, or a sign-up list.
 8. Verdict: SCRATCH (no demand evidence), PIVOT (demand exists for a different shape), or GO (evidence supports building the smallest version).
-9. Action plan, always. For SCRATCH or PIVOT: the ordered changes that would make it viable. For GO: the highest-leverage moves that turn a pass into a win, plus the one thing NOT to build yet.
+9. Action plan, always. For SCRATCH or PIVOT: the ordered changes that would make it viable. For GO: the few moves that most raise the odds of success, plus the one thing NOT to build yet.
 
 ## Quality bar
 - Every claim of demand points to something the user supplied, or says UNKNOWN.

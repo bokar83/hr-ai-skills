@@ -31,9 +31,9 @@ Pick the chart that answers the question, then make it honest and readable. Outp
    - Relationship between two measures: a scatter plot.
    - Exact values matter: a table.
 3. Set the axes. Bars start at zero. Lines may start elsewhere only if the axis is labelled clearly. Never cut an axis to make a change look bigger.
-4. Label directly. Put the title as the finding (Attrition fell 3 points in Q3), not the topic (Attrition). Label lines and bars on the chart instead of a distant legend. Name units and the time period.
+4. Label directly. Put the title as the finding (made-up example: Attrition fell 3 points in Q3), not the topic (Attrition). Label lines and bars on the chart instead of a distant legend. Name units and the time period.
 5. Colour with purpose. Use one neutral colour for everything, and one accent for the point you want seen. Do not use red and green alone to separate groups, because many people cannot tell them apart. Check that the chart still reads in greyscale.
-6. Protect people. If a group is smaller than the minimum your company sets (often five or ten), combine it or hide it. Never chart a group so small that an individual can be identified.
+6. Protect people. If a group is smaller than the minimum group size your company sets, combine it or hide it. If you do not know that minimum, write UNKNOWN and ask for it. Do not assume a number. Never chart a group so small that an individual can be identified.
 7. Remove clutter: no 3D, no heavy gridlines, no decoration, no second axis unless it is unavoidable.
 8. Add a source line and the date of the data. Add one caveat if the data is partial.
 9. Give a test: show the chart to someone for five seconds. They should say the message back.

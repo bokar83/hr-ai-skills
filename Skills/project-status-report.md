@@ -19,7 +19,7 @@ One page that shows where a project stands and what needs a decision. Built only
 ## Inputs needed
 - The plan: items or milestones with owner role and due date.
 - Current state of each item: done, in progress, not started, or blocked, with any numbers (for example sessions delivered against target).
-- Today's date.
+- Today's date, and the project start date (needed for the pace arithmetic).
 - Open risks and any decisions waiting on someone.
 
 ## Steps
@@ -27,14 +27,14 @@ One page that shows where a project stands and what needs a decision. Built only
 2. For each item, set a status from the facts given:
    - DONE: finished, with evidence.
    - ON TRACK: started and pace matches the plan.
-   - AT RISK: pace is behind, a dependency is missing, or no update is available.
+   - AT RISK: pace is behind, or a dependency is missing.
    - LATE: past the due date and not done.
    - NO DATA: nothing was supplied. This counts as a warning, not a pass.
 3. For numeric targets, do the pace arithmetic in plain view: target, actual so far, share of time elapsed, the pace needed from now to finish. Show the numbers. If an input is missing, mark NO DATA, do not estimate.
 4. List what is late or at risk, each with a cause if known and one proposed next step. Mark unknown causes as UNKNOWN.
 5. List decisions needed: what, from which role, by when.
 6. List the top three risks with an early warning sign each.
-7. Give an overall call: ON TRACK, AT RISK or OFF TRACK, with one sentence of reason that follows from the item statuses.
+7. Give an overall call with one sentence of reason: ON TRACK (every item is DONE or ON TRACK), AT RISK (any item is AT RISK or NO DATA), or OFF TRACK (any item is LATE). Say if the user may want a different rule.
 8. Add a line for what changed since the last report, if a previous status was supplied.
 
 ## Quality bar

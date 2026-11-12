@@ -27,8 +27,8 @@ A ten-point check for anything you built with AI that other people will rely on.
    1. Think first: assumptions are written down, open questions were asked, not guessed.
    2. Simplicity: it is the smallest build that meets the goal. No extra steps, options or features nobody asked for.
    3. Surgical changes: the last edit touched only what had to change. Nothing unrelated was reworded or restructured.
-   4. Clear goal: there is a stated, checkable done-condition, and the build loops back when the result does not match it.
-   5. Hot spots: nothing repeats the same work, loops without an end, or forces the user to re-enter the same input.
+   4. Clear goal: there is a stated, checkable done-condition, and the build says what to do when the result does not match it.
+   5. No wasted work: nothing repeats the same step, loops without an end, or forces the user to re-enter the same input.
    6. Verification: there is at least one test input with a known good answer, and the build was run against it. Feels fine is not a test.
    7. Failure handling: the build says what to do on an error or an empty input, instead of guessing.
    8. Dependencies: every tool, file, data source or link it needs is named. Each one is something the user will really have, and each one adds risk.
